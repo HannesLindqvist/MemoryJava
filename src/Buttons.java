@@ -18,10 +18,13 @@ public class Buttons extends JFrame {
                 JFrame frame = new JFrame();
                 frame.setTitle("Detta ska bli ett memoryspel");
 
-                // Se till att adda en panel till framen.
+
+        //      frame.setLayout(new FlowLayout(FlowLayout.LEFT));
                 JPanel player1 = new JPanel();
+                player1.setLayout(new FlowLayout(FlowLayout.CENTER));
+                player1.setPreferredSize(new Dimension(50,50));
                 player1.setBackground(Color.LIGHT_GRAY);
-                player1.setBounds(0,0,50,50);
+
 
 
 
@@ -30,8 +33,13 @@ public class Buttons extends JFrame {
                 frame.setIconImage(image.getImage());
 
 
-                // Gör så att kanapparna hamnar i rader och kolumner i samma size
-                frame.setLayout(new GridLayout(4,4));
+                // Koden till själva spelplanen
+                JPanel boardPanel = new JPanel();
+                frame.setLayout(new FlowLayout(FlowLayout.TRAILING));
+                boardPanel.setPreferredSize(new Dimension(300,300));
+                boardPanel.setBackground(Color.lightGray);
+                boardPanel.setLayout(new GridLayout(4,4));
+
 
 
                 JButton button1 = new JButton();
@@ -42,7 +50,6 @@ public class Buttons extends JFrame {
                 JButton button4 = new JButton("");
                 JButton button5 = new JButton("");
                 JButton button6 = new JButton();
-
                 JButton button7 = new JButton("");
                 JButton button8 = new JButton("");
                 JButton button9 = new JButton("");
@@ -55,10 +62,8 @@ public class Buttons extends JFrame {
                 JButton button14 = new JButton("");
                 JButton button15 = new JButton("");
                 JButton button16 = new JButton("");
-           //   JButton button17 = new JButton("17");
-             // JButton button18 = new JButton("18");
-              //  button18.setPreferredSize(new Dimension(10,10));
-                //   button17.setVerticalAlignment(JButton.LEFT);
+
+
 
 
 
@@ -83,20 +88,21 @@ public class Buttons extends JFrame {
                 button7.setBackground(Color.orange);    button15.setBackground(Color.orange);
                 button8.setBackground(Color.orange);    button16.setBackground(Color.orange);
 
-                // Addar knapparna på framen.
+                // Addar knappar till panelen som ligger på boarden. boardPanelvariabeln är själva spelplanen.
 
-                frame.add(button1); frame.add(button2); frame.add(button3); frame.add(button4);
-                frame.add(button5); frame.add(button6); frame.add(button7); frame.add(button8);
-                frame.add(button9); frame.add(button10); frame.add(button11); frame.add(button12);
-                frame.add(button13); frame.add(button14); frame.add(button15); frame.add(button16);
-               // frame.add(button17); frame.add(button18);
+                boardPanel.add(button1); boardPanel.add(button2); boardPanel.add(button3); boardPanel.add(button4);
+                boardPanel.add(button5); boardPanel.add(button6); boardPanel.add(button7); boardPanel.add(button8);
+                boardPanel.add(button9); boardPanel.add(button10); boardPanel.add(button11); boardPanel.add(button12);
+                boardPanel.add(button13); boardPanel.add(button14); boardPanel.add(button15); boardPanel.add(button16);
 
-           //    frame.add(player1);
+
 
                 // Avgör sizen på framen och att den programmet avslutas när man stänger ner det.
 
                 frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                frame.setSize(450,450);
+                frame.setSize(450,350);
+                frame.add(boardPanel);
+                frame.add(player1);
                 frame.setVisible(true);
 
 
