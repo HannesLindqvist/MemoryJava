@@ -19,15 +19,6 @@ public class Buttons extends JFrame {
                 frame.setTitle("Detta ska bli ett memoryspel");
 
 
-        //      frame.setLayout(new FlowLayout(FlowLayout.LEFT));
-                JPanel player1 = new JPanel();
-                player1.setLayout(new FlowLayout(FlowLayout.CENTER));
-                player1.setPreferredSize(new Dimension(50,50));
-                player1.setBackground(Color.LIGHT_GRAY);
-
-
-
-
                 // Lägger till en bild på knappen
                 ImageIcon image = new ImageIcon("Svamp.jpg");
                 frame.setIconImage(image.getImage());
@@ -41,7 +32,38 @@ public class Buttons extends JFrame {
                 boardPanel.setLayout(new GridLayout(4,4));
 
 
+                // Layout på knappar och paneler. Måste vara ovanför kanpparna eller panelerna för att funka.
+                EtchedBorder etch = new EtchedBorder();
 
+                // Player 1 och 2 logik
+                JPanel container = new JPanel();
+                container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+                JLabel player1 = new JLabel("Player 1");
+                player1.setFont(new Font("Verdana", 1,20));
+
+                JLabel player2 = new JLabel("Player 2");
+                player2.setFont(new Font("Verdana", 1,20));
+                JPanel panel1 = new JPanel();
+                JPanel panel2 = new JPanel();
+
+                panel1.setBackground(Color.lightGray);
+                panel2.setBackground(Color.GREEN);
+
+                panel1.setPreferredSize(new Dimension(120,150));
+                panel2.setPreferredSize(new Dimension(120,150));
+
+                panel1.setBorder(etch);
+                panel2.setBorder(etch);
+
+                panel1.add(player1);
+                panel2.add(player2);
+
+                container.add(panel1);
+                container.add(panel2);
+
+
+
+                // Knappar/kort till memorybrädet.
                 JButton button1 = new JButton();
                 button1.setIcon(image);
 
@@ -68,7 +90,7 @@ public class Buttons extends JFrame {
 
 
 
-                EtchedBorder etch = new EtchedBorder();
+
 
                 // En viss typ av layout på knapparna, går enkelt att ändra.
 
@@ -101,8 +123,8 @@ public class Buttons extends JFrame {
 
                 frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
                 frame.setSize(450,350);
+                frame.add(container);
                 frame.add(boardPanel);
-                frame.add(player1);
                 frame.setVisible(true);
 
 
