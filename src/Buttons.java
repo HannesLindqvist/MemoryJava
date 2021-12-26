@@ -7,21 +7,33 @@ import javax.swing.ImageIcon;
 import java.util.ArrayList;
 
 public class Buttons extends JFrame {
-
-
-
+    ImageIcon[] mixedDeck = Cards.mixDeck();
+    ImageIcon card1 = mixedDeck[0]; 
+    ImageIcon card2 = mixedDeck[1]; 
+    ImageIcon card3 = mixedDeck[2]; 
+    ImageIcon card4 = mixedDeck[3]; 
+    ImageIcon card5 = mixedDeck[4]; 
+    ImageIcon card6 = mixedDeck[5]; 
+    ImageIcon card7 = mixedDeck[6]; 
+    ImageIcon card8 = mixedDeck[7]; 
+    ImageIcon card9 = mixedDeck[8]; 
+    ImageIcon card10 = mixedDeck[9]; 
+    ImageIcon card11 = mixedDeck[10]; 
+    ImageIcon card12 = mixedDeck[11]; 
+    ImageIcon card13 = mixedDeck[12]; 
+    ImageIcon card14 = mixedDeck[13]; 
+    ImageIcon card15 = mixedDeck[14]; 
+    ImageIcon card16 = mixedDeck[15]; 
 
     public Buttons() {
-
-
+                
                 // Grundramen till spelet.
                 JFrame frame = new JFrame();
                 frame.setTitle("Detta ska bli ett memoryspel");
 
 
                 // Lägger till en bild på knappen
-                ImageIcon image = new ImageIcon("Svamp.jpg");
-                frame.setIconImage(image.getImage());
+                //frame.setIconImage(card1.getImage());
 
 
                 // Koden till själva spelplanen
@@ -64,8 +76,6 @@ public class Buttons extends JFrame {
 
                 // Knappar/kort till memorybrädet.
                 JButton button1 = new JButton();
-                button1.setIcon(image);
-
                 JButton button2 = new JButton();
                 JButton button3 = new JButton();
                 JButton button4 = new JButton();
@@ -75,14 +85,30 @@ public class Buttons extends JFrame {
                 JButton button8 = new JButton();
                 JButton button9 = new JButton();
                 JButton button10 = new JButton();
-                button10.setIcon(image);
-
                 JButton button11 = new JButton();
                 JButton button12 = new JButton();
                 JButton button13 = new JButton();
                 JButton button14 = new JButton();
                 JButton button15 = new JButton();
                 JButton button16 = new JButton();
+
+
+                button1.setIcon(null);
+                button2.setIcon(mixedDeck[1]);
+                button3.setIcon(mixedDeck[2]);
+                button4.setIcon(mixedDeck[3]);
+                button5.setIcon(mixedDeck[4]);
+                button6.setIcon(mixedDeck[5]);
+                button7.setIcon(mixedDeck[6]);
+                button8.setIcon(mixedDeck[7]);
+                button9.setIcon(mixedDeck[8]);
+                button10.setIcon(mixedDeck[9]);
+                button11.setIcon(mixedDeck[10]);
+                button12.setIcon(mixedDeck[11]);
+                button13.setIcon(mixedDeck[12]);
+                button14.setIcon(mixedDeck[13]);
+                button15.setIcon(mixedDeck[14]);
+                button16.setIcon(mixedDeck[15]);
 
                 // Menyval
                 JPanel meny = new JPanel();
