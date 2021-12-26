@@ -26,7 +26,7 @@ public class Buttons extends JFrame {
 
                 // Koden till själva spelplanen
                 JPanel boardPanel = new JPanel();
-                frame.setLayout(new FlowLayout(FlowLayout.TRAILING));
+                frame.setLayout(new FlowLayout());
                 boardPanel.setPreferredSize(new Dimension(300,300));
                 boardPanel.setBackground(Color.lightGray);
                 boardPanel.setLayout(new GridLayout(4,4));
@@ -62,31 +62,36 @@ public class Buttons extends JFrame {
                 container.add(panel2);
 
 
-
                 // Knappar/kort till memorybrädet.
                 JButton button1 = new JButton();
                 button1.setIcon(image);
 
                 JButton button2 = new JButton();
                 JButton button3 = new JButton();
-                JButton button4 = new JButton("");
-                JButton button5 = new JButton("");
+                JButton button4 = new JButton();
+                JButton button5 = new JButton();
                 JButton button6 = new JButton();
-                JButton button7 = new JButton("");
-                JButton button8 = new JButton("");
-                JButton button9 = new JButton("");
-                JButton button10 = new JButton("");
+                JButton button7 = new JButton();
+                JButton button8 = new JButton();
+                JButton button9 = new JButton();
+                JButton button10 = new JButton();
                 button10.setIcon(image);
 
-                JButton button11 = new JButton("");
-                JButton button12 = new JButton("");
-                JButton button13 = new JButton("");
-                JButton button14 = new JButton("");
-                JButton button15 = new JButton("");
-                JButton button16 = new JButton("");
+                JButton button11 = new JButton();
+                JButton button12 = new JButton();
+                JButton button13 = new JButton();
+                JButton button14 = new JButton();
+                JButton button15 = new JButton();
+                JButton button16 = new JButton();
 
+                // Menyval
+                JPanel meny = new JPanel();
+                JButton newGame = new JButton("Nytt Spel");
+                JButton cancel = new JButton("Avsluta");
+                meny.add(newGame);
+                meny.add(cancel);
 
-
+                
 
 
 
@@ -122,9 +127,13 @@ public class Buttons extends JFrame {
                 // Avgör sizen på framen och att den programmet avslutas när man stänger ner det.
 
                 frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                frame.setSize(450,350);
+                frame.setSize(450,400);
                 frame.add(container);
                 frame.add(boardPanel);
+                frame.add(meny);
+               
+
+
                 frame.setVisible(true);
 
 
