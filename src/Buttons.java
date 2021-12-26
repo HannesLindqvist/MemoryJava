@@ -8,9 +8,6 @@ import java.util.ArrayList;
 
 public class Buttons extends JFrame {
 
-
-
-
     public Buttons() {
 
 
@@ -91,10 +88,6 @@ public class Buttons extends JFrame {
                 meny.add(newGame);
                 meny.add(cancel);
 
-                
-
-
-
 
 
                 // En viss typ av layout på knapparna, går enkelt att ändra.
@@ -122,8 +115,6 @@ public class Buttons extends JFrame {
                 boardPanel.add(button9); boardPanel.add(button10); boardPanel.add(button11); boardPanel.add(button12);
                 boardPanel.add(button13); boardPanel.add(button14); boardPanel.add(button15); boardPanel.add(button16);
 
-
-
                 // Avgör sizen på framen och att den programmet avslutas när man stänger ner det.
 
                 frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -132,12 +123,7 @@ public class Buttons extends JFrame {
                 frame.add(container);
                 frame.add(boardPanel);
                 frame.add(meny);
-               
-
-
                 frame.setVisible(true);
-
-
 
 
                 // Logik till knapparna
