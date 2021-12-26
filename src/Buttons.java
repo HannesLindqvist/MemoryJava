@@ -128,6 +128,7 @@ public class Buttons extends JFrame {
 
                 frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
                 frame.setSize(450,400);
+                frame.setResizable(false);
                 frame.add(container);
                 frame.add(boardPanel);
                 frame.add(meny);
