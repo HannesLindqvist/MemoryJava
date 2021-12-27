@@ -144,9 +144,6 @@ public class Buttons extends JFrame {
 
                 frame.setVisible(true);
 
-
-
-
                 // Logik till knapparna
 
                 button1.addActionListener(new ActionListener() {
