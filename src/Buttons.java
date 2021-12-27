@@ -9,8 +9,14 @@ import java.util.ArrayList;
 public class Buttons extends JFrame {
     ImageIcon[] mixedDeck = Cards.mixDeck();
 
+<<<<<<< HEAD
         public Buttons() {
                 
+=======
+    public Buttons() {
+
+
+>>>>>>> 66dbee4db230dd2a2d07723439c10f2d9dc0f64b
                 // Grundramen till spelet.
                 JFrame frame = new JFrame();
                 frame.setTitle("Detta ska bli ett memoryspel");
@@ -130,7 +136,10 @@ public class Buttons extends JFrame {
                 
                 button1.setEnabled(true);
 
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 66dbee4db230dd2a2d07723439c10f2d9dc0f64b
                 // Avgör sizen på framen och att den programmet avslutas när man stänger ner det.
 
                 frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -139,11 +148,12 @@ public class Buttons extends JFrame {
                 frame.add(container);
                 frame.add(boardPanel);
                 frame.add(meny);
-               
-
-
                 frame.setVisible(true);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 66dbee4db230dd2a2d07723439c10f2d9dc0f64b
                 // Logik till knapparna
 
                 button1.addActionListener(new ActionListener() {
