@@ -10,6 +10,7 @@ public class Main implements ActionListener {
 
         SwingUtilities.invokeLater(new LaunchMenu());
 
+
     }
 
     @Override

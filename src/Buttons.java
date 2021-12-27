@@ -13,8 +13,6 @@ public class Buttons extends JFrame {
         public Buttons() {
 
 
-
-
                 // Grundramen till spelet.
                 JFrame frame = new JFrame();
                 frame.setTitle("Detta ska bli ett memoryspel");
