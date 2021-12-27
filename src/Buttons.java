@@ -8,24 +8,8 @@ import java.util.ArrayList;
 
 public class Buttons extends JFrame {
     ImageIcon[] mixedDeck = Cards.mixDeck();
-    ImageIcon card1 = mixedDeck[0]; 
-    ImageIcon card2 = mixedDeck[1]; 
-    ImageIcon card3 = mixedDeck[2]; 
-    ImageIcon card4 = mixedDeck[3]; 
-    ImageIcon card5 = mixedDeck[4]; 
-    ImageIcon card6 = mixedDeck[5]; 
-    ImageIcon card7 = mixedDeck[6]; 
-    ImageIcon card8 = mixedDeck[7]; 
-    ImageIcon card9 = mixedDeck[8]; 
-    ImageIcon card10 = mixedDeck[9]; 
-    ImageIcon card11 = mixedDeck[10]; 
-    ImageIcon card12 = mixedDeck[11]; 
-    ImageIcon card13 = mixedDeck[12]; 
-    ImageIcon card14 = mixedDeck[13]; 
-    ImageIcon card15 = mixedDeck[14]; 
-    ImageIcon card16 = mixedDeck[15]; 
 
-    public Buttons() {
+        public Buttons() {
                 
                 // Grundramen till spelet.
                 JFrame frame = new JFrame();
@@ -93,7 +77,7 @@ public class Buttons extends JFrame {
                 JButton button16 = new JButton();
 
 
-                button1.setIcon(null);
+                button1.setIcon(mixedDeck[0]);
                 button2.setIcon(mixedDeck[1]);
                 button3.setIcon(mixedDeck[2]);
                 button4.setIcon(mixedDeck[3]);
@@ -116,10 +100,6 @@ public class Buttons extends JFrame {
                 JButton cancel = new JButton("Avsluta");
                 meny.add(newGame);
                 meny.add(cancel);
-
-                
-
-
 
 
 
@@ -147,9 +127,10 @@ public class Buttons extends JFrame {
                 boardPanel.add(button5); boardPanel.add(button6); boardPanel.add(button7); boardPanel.add(button8);
                 boardPanel.add(button9); boardPanel.add(button10); boardPanel.add(button11); boardPanel.add(button12);
                 boardPanel.add(button13); boardPanel.add(button14); boardPanel.add(button15); boardPanel.add(button16);
+                
+                button1.setEnabled(true);
 
-
-
+                
                 // Avgör sizen på framen och att den programmet avslutas när man stänger ner det.
 
                 frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -169,14 +150,19 @@ public class Buttons extends JFrame {
                 // Logik till knapparna
 
                 button1.addActionListener(new ActionListener() {
-                    @Override
+                    
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource() == button1){
-                            System.out.println("Bruh");
+                            Main.player1FirstCard = mixedDeck[0].toString();
+
+                        }
+                        else {
+                            System.out.println(Main.player1FirstCard);
                         }
 
                     }
 
+                
 
                 });
     }
