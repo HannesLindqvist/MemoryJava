@@ -1,20 +1,49 @@
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 
-public class Buttons extends JFrame {
+public class Buttons extends JFrame implements ActionListener {
     ImageIcon[] mixedDeck = Cards.mixDeck();
+    
+    JFrame frame = new JFrame();
+    JPanel boardPanel = new JPanel();
+
+    EtchedBorder etch = new EtchedBorder();
+    JPanel container = new JPanel();
+
+    JLabel player1 = new JLabel("Player 1");
+    JLabel player2 = new JLabel("Player 2");
+    JPanel panel1 = new JPanel();
+    JPanel panel2 = new JPanel();
+
+    JButton button1 = new JButton();
+    JButton button2 = new JButton();
+    JButton button3 = new JButton();
+    JButton button4 = new JButton();
+    JButton button5 = new JButton();
+    JButton button6 = new JButton();
+    JButton button7 = new JButton();
+    JButton button8 = new JButton();
+    JButton button9 = new JButton();
+    JButton button10 = new JButton();
+    JButton button11 = new JButton();
+    JButton button12 = new JButton();
+    JButton button13 = new JButton();
+    JButton button14 = new JButton();
+    JButton button15 = new JButton();
+    JButton button16 = new JButton();
 
 
         public Buttons() {
 
 
                 // Grundramen till spelet.
-                JFrame frame = new JFrame();
                 frame.setTitle("Detta ska bli ett memoryspel");
 
 
@@ -23,7 +52,6 @@ public class Buttons extends JFrame {
 
 
                 // Koden till själva spelplanen
-                JPanel boardPanel = new JPanel();
                 frame.setLayout(new FlowLayout());
                 boardPanel.setPreferredSize(new Dimension(300,300));
                 boardPanel.setBackground(Color.lightGray);
@@ -31,19 +59,12 @@ public class Buttons extends JFrame {
 
 
                 // Layout på knappar och paneler. Måste vara ovanför kanpparna eller panelerna för att funka.
-                EtchedBorder etch = new EtchedBorder();
 
                 // Player 1 och 2 logik
-                JPanel container = new JPanel();
                 container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-                JLabel player1 = new JLabel("Player 1");
                 player1.setFont(new Font("Verdana", 1,20));
 
-                JLabel player2 = new JLabel("Player 2");
                 player2.setFont(new Font("Verdana", 1,20));
-                JPanel panel1 = new JPanel();
-                JPanel panel2 = new JPanel();
-
                 panel1.setBackground(Color.lightGray);
                 panel2.setBackground(Color.GREEN);
 
@@ -61,25 +82,8 @@ public class Buttons extends JFrame {
 
 
                 // Knappar/kort till memorybrädet.
-                JButton button1 = new JButton();
-                JButton button2 = new JButton();
-                JButton button3 = new JButton();
-                JButton button4 = new JButton();
-                JButton button5 = new JButton();
-                JButton button6 = new JButton();
-                JButton button7 = new JButton();
-                JButton button8 = new JButton();
-                JButton button9 = new JButton();
-                JButton button10 = new JButton();
-                JButton button11 = new JButton();
-                JButton button12 = new JButton();
-                JButton button13 = new JButton();
-                JButton button14 = new JButton();
-                JButton button15 = new JButton();
-                JButton button16 = new JButton();
 
-
-                button1.setIcon(mixedDeck[0]);
+                button1.setIcon(null);
                 button2.setIcon(mixedDeck[1]);
                 button3.setIcon(mixedDeck[2]);
                 button4.setIcon(mixedDeck[3]);
@@ -145,25 +149,37 @@ public class Buttons extends JFrame {
 
 
                 // Logik till knapparna
-
+                button1.addActionListener(this);
+                button2.addActionListener(this);
+                /*
                 button1.addActionListener(new ActionListener() {
                     
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource() == button1){
-                            Main.player1FirstCard = mixedDeck[0].toString();
 
                         }
                         else {
-                            System.out.println(Main.player1FirstCard);
                         }
 
                     }
 
                 
 
-                });
+                });*/
     }
+    
 
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == button1) {
+            button1.setIcon(mixedDeck[0]);
+        }
+        if (e.getSource() == button2) {
+            button2.setEnabled(false);
+        }
+
+
+    }
 
 
 }
