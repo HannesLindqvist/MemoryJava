@@ -210,11 +210,78 @@ public class Buttons extends JFrame implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button1) {
-            button1.setIcon(mixedDeck[0]);
+        JButton selected = (JButton) e.getSource();
+
+        if(selected.equals(lastButtonPressed)){
+            System.out.println("You already turned this card");
+            return;
         }
-        if (e.getSource() == button2) {
-            button2.setEnabled(false);
+
+        System.out.println(previousCard);
+
+        if (selected.equals(button1)) {
+            button1.setIcon(mixedDeck[0]);
+            if(mixedDeck[0].toString().equals(previousCard)) {
+                this.disableCards(button1);
+                this.resetCardButton();
+            }
+            if (previousCard != null && !mixedDeck[0].toString().equals(previousCard)){
+                this.hideCards(button1);
+                this.resetCardButton();
+
+            }
+            else{
+            previousCard = mixedDeck[0].toString();
+            lastButtonPressed = selected;
+            }
+             
+        }
+        else if (e.getSource() == button2) {
+            button2.setIcon(mixedDeck[1]);
+            if(mixedDeck[1].toString().equals(previousCard)) {
+                this.disableCards(button2);
+                this.resetCardButton();
+            }
+            if (previousCard != null && !mixedDeck[1].toString().equals(previousCard)){
+                this.hideCards(button2);
+                this.resetCardButton();
+            }
+            else{
+            previousCard = mixedDeck[1].toString();
+            lastButtonPressed = selected;
+            }
+        }
+
+        else if (e.getSource() == button3) {
+            button3.setIcon(mixedDeck[2]);
+            if(mixedDeck[2].toString().equals(previousCard)) {
+                this.disableCards(button3);
+                this.resetCardButton();
+            }
+            if (previousCard != null && !mixedDeck[2].toString().equals(previousCard)){
+                this.hideCards(button3);
+                this.resetCardButton();
+            }
+            else{
+            previousCard = mixedDeck[2].toString();
+            lastButtonPressed = selected;
+            }
+        }
+
+        else if (e.getSource() == button4) {
+            button4.setIcon(mixedDeck[3]);
+            if(mixedDeck[3].toString().equals(previousCard)) {
+                this.disableCards(button4);
+                this.resetCardButton();
+            }
+            if (previousCard != null && !mixedDeck[3].toString().equals(previousCard)){
+                this.hideCards(button4);
+                this.resetCardButton();
+            }
+            else{
+            previousCard = mixedDeck[3].toString();
+            lastButtonPressed = selected;
+            }
         }
 
 
