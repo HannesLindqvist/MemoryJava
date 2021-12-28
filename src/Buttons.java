@@ -39,6 +39,9 @@ public class Buttons extends JFrame implements ActionListener {
     JButton button15 = new JButton();
     JButton button16 = new JButton();
 
+    JButton lastButtonPressed = null;
+    String previousCard = null;
+
 
         public Buttons() {
 
@@ -183,7 +186,27 @@ public class Buttons extends JFrame implements ActionListener {
                 });*/
     }
     
+    public void resetCardButton() {
+        this.lastButtonPressed = null;
+        this.previousCard = null;
+    }
     
+    public void hideCards(JButton thisButton) {
+        System.out.println("No match!");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        lastButtonPressed.setIcon(null);
+        thisButton.setIcon(null);
+    }
+
+    public void disableCards(JButton thisButton){
+        System.out.println("Match!");
+        lastButtonPressed.setEnabled(false);
+        thisButton.setEnabled(false);
+    }
 
 
     public void actionPerformed(ActionEvent e) {
