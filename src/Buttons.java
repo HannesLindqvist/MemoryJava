@@ -83,7 +83,7 @@ public class Buttons extends JFrame implements ActionListener {
 
                 // Knappar/kort till memorybrädet.
 
-                button1.setIcon(null);
+                button1.setIcon(mixedDeck[0]);
                 button2.setIcon(mixedDeck[1]);
                 button3.setIcon(mixedDeck[2]);
                 button4.setIcon(mixedDeck[3]);
@@ -151,6 +151,21 @@ public class Buttons extends JFrame implements ActionListener {
                 // Logik till knapparna
                 button1.addActionListener(this);
                 button2.addActionListener(this);
+                button3.addActionListener(this);
+                button4.addActionListener(this);
+                button5.addActionListener(this);
+                button6.addActionListener(this);
+                button7.addActionListener(this);
+                button8.addActionListener(this);
+                button9.addActionListener(this);
+                button10.addActionListener(this);
+                button11.addActionListener(this);
+                button12.addActionListener(this);
+                button13.addActionListener(this);
+                button14.addActionListener(this);
+                button15.addActionListener(this);
+                button16.addActionListener(this);
+                
                 /*
                 button1.addActionListener(new ActionListener() {
                     
@@ -167,6 +182,7 @@ public class Buttons extends JFrame implements ActionListener {
 
                 });*/
     }
+    
     
 
 
