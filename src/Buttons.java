@@ -187,8 +187,8 @@ public class Buttons extends JFrame implements ActionListener {
     }
     
     public void resetCardButton() {
-        this.lastButtonPressed = null;
-        this.previousCard = null;
+        lastButtonPressed = null;
+        previousCard = null;
     }
     
     public void hideCards(JButton thisButton) {
@@ -200,12 +200,17 @@ public class Buttons extends JFrame implements ActionListener {
         }
         lastButtonPressed.setIcon(null);
         thisButton.setIcon(null);
+        
+        this.resetCardButton();
     }
 
     public void disableCards(JButton thisButton){
         System.out.println("Match!");
+        
         lastButtonPressed.setEnabled(false);
         thisButton.setEnabled(false);
+
+        this.resetCardButton();
     }
 
 
@@ -217,17 +222,14 @@ public class Buttons extends JFrame implements ActionListener {
             return;
         }
 
-        System.out.println(previousCard);
-
         if (selected.equals(button1)) {
             button1.setIcon(mixedDeck[0]);
             if(mixedDeck[0].toString().equals(previousCard)) {
                 this.disableCards(button1);
-                this.resetCardButton();
+                return;
             }
             if (previousCard != null && !mixedDeck[0].toString().equals(previousCard)){
                 this.hideCards(button1);
-                this.resetCardButton();
 
             }
             else{
@@ -240,11 +242,10 @@ public class Buttons extends JFrame implements ActionListener {
             button2.setIcon(mixedDeck[1]);
             if(mixedDeck[1].toString().equals(previousCard)) {
                 this.disableCards(button2);
-                this.resetCardButton();
+                return;
             }
             if (previousCard != null && !mixedDeck[1].toString().equals(previousCard)){
                 this.hideCards(button2);
-                this.resetCardButton();
             }
             else{
             previousCard = mixedDeck[1].toString();
@@ -256,11 +257,10 @@ public class Buttons extends JFrame implements ActionListener {
             button3.setIcon(mixedDeck[2]);
             if(mixedDeck[2].toString().equals(previousCard)) {
                 this.disableCards(button3);
-                this.resetCardButton();
+                return;
             }
             if (previousCard != null && !mixedDeck[2].toString().equals(previousCard)){
                 this.hideCards(button3);
-                this.resetCardButton();
             }
             else{
             previousCard = mixedDeck[2].toString();
@@ -272,11 +272,10 @@ public class Buttons extends JFrame implements ActionListener {
             button4.setIcon(mixedDeck[3]);
             if(mixedDeck[3].toString().equals(previousCard)) {
                 this.disableCards(button4);
-                this.resetCardButton();
+                return;
             }
             if (previousCard != null && !mixedDeck[3].toString().equals(previousCard)){
                 this.hideCards(button4);
-                this.resetCardButton();
             }
             else{
             previousCard = mixedDeck[3].toString();
