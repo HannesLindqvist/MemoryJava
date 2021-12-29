@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import java.util.ArrayList;
 
 public class Buttons extends JFrame implements ActionListener {
+
     ImageIcon[] mixedDeck = Cards.mixDeck();
     
     JFrame frame = new JFrame();
@@ -38,25 +39,23 @@ public class Buttons extends JFrame implements ActionListener {
     JButton button14 = new JButton();
     JButton button15 = new JButton();
     JButton button16 = new JButton();
-
+    JButton newGame = new JButton("Nytt Spel");
+    JButton cancel = new JButton("Avsluta");
+    JPanel meny = new JPanel();
 
         public Buttons() {
-
 
                 // Grundramen till spelet.
                 frame.setTitle("Detta ska bli ett memoryspel");
 
-
                 // Lägger till en bild på knappen
                 //frame.setIconImage(card1.getImage());
-
 
                 // Koden till själva spelplanen
                 frame.setLayout(new FlowLayout());
                 boardPanel.setPreferredSize(new Dimension(300,300));
                 boardPanel.setBackground(Color.lightGray);
                 boardPanel.setLayout(new GridLayout(4,4));
-
 
                 // Layout på knappar och paneler. Måste vara ovanför kanpparna eller panelerna för att funka.
 
@@ -84,28 +83,28 @@ public class Buttons extends JFrame implements ActionListener {
                 // Knappar/kort till memorybrädet.
 
                 button1.setIcon(null);
-                button2.setIcon(mixedDeck[1]);
-                button3.setIcon(mixedDeck[2]);
-                button4.setIcon(mixedDeck[3]);
-                button5.setIcon(mixedDeck[4]);
-                button6.setIcon(mixedDeck[5]);
-                button7.setIcon(mixedDeck[6]);
-                button8.setIcon(mixedDeck[7]);
-                button9.setIcon(mixedDeck[8]);
-                button10.setIcon(mixedDeck[9]);
-                button11.setIcon(mixedDeck[10]);
-                button12.setIcon(mixedDeck[11]);
-                button13.setIcon(mixedDeck[12]);
-                button14.setIcon(mixedDeck[13]);
-                button15.setIcon(mixedDeck[14]);
-                button16.setIcon(mixedDeck[15]);
+                button2.setIcon(null);
+                button3.setIcon(null);
+                button4.setIcon(null);
+                button5.setIcon(null);
+                button6.setIcon(null);
+                button7.setIcon(null);
+                button8.setIcon(null);
+                button9.setIcon(null);
+                button10.setIcon(null);
+                button11.setIcon(null);
+                button12.setIcon(null);
+                button13.setIcon(null);
+                button14.setIcon(null);
+                button15.setIcon(null);
+                button16.setIcon(null);
+                //button16.setIcon(mixedDeck[15]);
 
                 // Menyval
-                JPanel meny = new JPanel();
-                JButton newGame = new JButton("Nytt Spel");
-                JButton cancel = new JButton("Avsluta");
+
                 meny.add(newGame);
                 meny.add(cancel);
+
 
 
 
@@ -151,31 +150,26 @@ public class Buttons extends JFrame implements ActionListener {
                 // Logik till knapparna
                 button1.addActionListener(this);
                 button2.addActionListener(this);
-                /*
-                button1.addActionListener(new ActionListener() {
-                    
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource() == button1){
-
-                        }
-                        else {
-                        }
-
-                    }
-
-                
-
-                });*/
-    }
-    
-
+                cancel.addActionListener(this);
+                newGame.addActionListener(this);
+        }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button1) {
             button1.setIcon(mixedDeck[0]);
         }
+
         if (e.getSource() == button2) {
             button2.setEnabled(false);
+        }
+
+        if (e.getSource() == cancel){
+            frame.dispose();
+        }
+
+        if (e.getSource() == newGame){
+            SwingUtilities.invokeLater(new LaunchMenu());
+            frame.dispose();
         }
 
 

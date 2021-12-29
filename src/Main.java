@@ -9,9 +9,10 @@ public class Main implements ActionListener {
     String secondCard = null;
 
     public static void main(String[] args) {
+        SwingUtilities.invokeLater(new LaunchMenu());
         Player player1 = new Player();
         Player player2 = new Player();
-        Buttons gui = new Buttons();
+        //Buttons gui = new Buttons();
 
         boolean gameOver = false;
 

@@ -66,7 +66,6 @@ public class LaunchMenu extends JFrame implements Runnable, ActionListener {
                 if(e.getSource()==playButton){
                     frame.dispose();
                     Buttons theGame = new Buttons();
-                    System.out.println("Hej");
                 }
             }
         });
