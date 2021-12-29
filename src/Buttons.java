@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 public class Buttons extends JFrame implements ActionListener {
 
-    ImageIcon[] mixedDeck = Cards.mixDeck();
-    
+    ImageIcon[] mixedCardDeck = Cards.mixDeck();
+
+
     JFrame frame = new JFrame();
     JPanel boardPanel = new JPanel();
 
@@ -39,128 +40,291 @@ public class Buttons extends JFrame implements ActionListener {
     JButton button14 = new JButton();
     JButton button15 = new JButton();
     JButton button16 = new JButton();
+
     JButton newGame = new JButton("Nytt Spel");
     JButton cancel = new JButton("Avsluta");
     JPanel meny = new JPanel();
 
-        public Buttons() {
 
-                // Grundramen till spelet.
-                frame.setTitle("Detta ska bli ett memoryspel");
+    JButton lastButtonPressed = null;
+    String previousCard = null;
 
-                // Lägger till en bild på knappen
-                //frame.setIconImage(card1.getImage());
+    public Buttons() {
 
-                // Koden till själva spelplanen
-                frame.setLayout(new FlowLayout());
-                boardPanel.setPreferredSize(new Dimension(300,300));
-                boardPanel.setBackground(Color.lightGray);
-                boardPanel.setLayout(new GridLayout(4,4));
+        // Grundramen till spelet.
+        frame.setTitle("Detta ska bli ett memoryspel");
 
-                // Layout på knappar och paneler. Måste vara ovanför kanpparna eller panelerna för att funka.
+        // Lägger till en bild på knappen
+        //frame.setIconImage(card1.getImage());
 
-                // Player 1 och 2 logik
-                container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-                player1.setFont(new Font("Verdana", 1,20));
+        // Koden till själva spelplanen
+        frame.setLayout(new FlowLayout());
+        boardPanel.setPreferredSize(new Dimension(300, 300));
+        boardPanel.setBackground(Color.lightGray);
+        boardPanel.setLayout(new GridLayout(4, 4));
 
-                player2.setFont(new Font("Verdana", 1,20));
-                panel1.setBackground(Color.lightGray);
-                panel2.setBackground(Color.GREEN);
+        // Layout på knappar och paneler. Måste vara ovanför kanpparna eller panelerna för att funka.
 
-                panel1.setPreferredSize(new Dimension(120,150));
-                panel2.setPreferredSize(new Dimension(120,150));
+        // Player 1 och 2 logik
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        player1.setFont(new Font("Verdana", 1, 20));
 
-                panel1.setBorder(etch);
-                panel2.setBorder(etch);
+        player2.setFont(new Font("Verdana", 1, 20));
+        panel1.setBackground(Color.lightGray);
+        panel2.setBackground(Color.GREEN);
 
-                panel1.add(player1);
-                panel2.add(player2);
+        panel1.setPreferredSize(new Dimension(120, 150));
+        panel2.setPreferredSize(new Dimension(120, 150));
 
-                container.add(panel1);
-                container.add(panel2);
+        panel1.setBorder(etch);
+        panel2.setBorder(etch);
 
+        panel1.add(player1);
+        panel2.add(player2);
 
-                // Knappar/kort till memorybrädet.
-
-                button1.setIcon(null);
-                button2.setIcon(null);
-                button3.setIcon(null);
-                button4.setIcon(null);
-                button5.setIcon(null);
-                button6.setIcon(null);
-                button7.setIcon(null);
-                button8.setIcon(null);
-                button9.setIcon(null);
-                button10.setIcon(null);
-                button11.setIcon(null);
-                button12.setIcon(null);
-                button13.setIcon(null);
-                button14.setIcon(null);
-                button15.setIcon(null);
-                button16.setIcon(null);
-                //button16.setIcon(mixedDeck[15]);
-
-                // Menyval
-
-                meny.add(newGame);
-                meny.add(cancel);
+        container.add(panel1);
+        container.add(panel2);
 
 
+        // Knappar/kort till memorybrädet.
+
+        button1.setIcon(mixedCardDeck[0]);
+        button2.setIcon(mixedCardDeck[1]);
+        button3.setIcon(mixedCardDeck[2]);
+        button4.setIcon(mixedCardDeck[3]);
+        button5.setIcon(mixedCardDeck[4]);
+        button6.setIcon(mixedCardDeck[5]);
+        button7.setIcon(mixedCardDeck[6]);
+        button8.setIcon(mixedCardDeck[7]);
+        button9.setIcon(mixedCardDeck[8]);
+        button10.setIcon(mixedCardDeck[9]);
+        button11.setIcon(mixedCardDeck[10]);
+        button12.setIcon(mixedCardDeck[11]);
+        button13.setIcon(mixedCardDeck[12]);
+        button14.setIcon(mixedCardDeck[13]);
+        button15.setIcon(mixedCardDeck[14]);
+        button16.setIcon(mixedCardDeck[15]);
 
 
-                // En viss typ av layout på knapparna, går enkelt att ändra.
+        // Menyval
 
-                button1.setBorder(etch);     button5.setBorder(etch);     button9.setBorder(etch);      button13.setBorder(etch);
-                button2.setBorder(etch);     button6.setBorder(etch);     button10.setBorder(etch);     button14.setBorder(etch);
-                button3.setBorder(etch);     button7.setBorder(etch);     button11.setBorder(etch);     button15.setBorder(etch);
-                button4.setBorder(etch);     button8.setBorder(etch);     button12.setBorder(etch);     button16.setBorder(etch);
+        meny.add(newGame);
+        meny.add(cancel);
 
-                // Sätter färgen på knapparna, enkelt att ändra.
 
-                button1.setBackground(Color.orange);    button9.setBackground(Color.orange);
-                button2.setBackground(Color.orange);    button10.setBackground(Color.orange);
-                button3.setBackground(Color.orange);    button11.setBackground(Color.orange);
-                button4.setBackground(Color.orange);    button12.setBackground(Color.orange);
-                button5.setBackground(Color.orange);    button13.setBackground(Color.orange);
-                button6.setBackground(Color.orange);    button14.setBackground(Color.orange);
-                button7.setBackground(Color.orange);    button15.setBackground(Color.orange);
-                button8.setBackground(Color.orange);    button16.setBackground(Color.orange);
+        // En viss typ av layout på knapparna, går enkelt att ändra.
 
-                // Addar knappar till panelen som ligger på boarden. boardPanelvariabeln är själva spelplanen.
+        button1.setBorder(etch);
+        button5.setBorder(etch);
+        button9.setBorder(etch);
+        button13.setBorder(etch);
+        button2.setBorder(etch);
+        button6.setBorder(etch);
+        button10.setBorder(etch);
+        button14.setBorder(etch);
+        button3.setBorder(etch);
+        button7.setBorder(etch);
+        button11.setBorder(etch);
+        button15.setBorder(etch);
+        button4.setBorder(etch);
+        button8.setBorder(etch);
+        button12.setBorder(etch);
+        button16.setBorder(etch);
 
-                boardPanel.add(button1); boardPanel.add(button2); boardPanel.add(button3); boardPanel.add(button4);
-                boardPanel.add(button5); boardPanel.add(button6); boardPanel.add(button7); boardPanel.add(button8);
-                boardPanel.add(button9); boardPanel.add(button10); boardPanel.add(button11); boardPanel.add(button12);
-                boardPanel.add(button13); boardPanel.add(button14); boardPanel.add(button15); boardPanel.add(button16);
+        // Sätter färgen på knapparna, enkelt att ändra.
+
+        button1.setBackground(Color.orange);
+        button9.setBackground(Color.orange);
+        button2.setBackground(Color.orange);
+        button10.setBackground(Color.orange);
+        button3.setBackground(Color.orange);
+        button11.setBackground(Color.orange);
+        button4.setBackground(Color.orange);
+        button12.setBackground(Color.orange);
+        button5.setBackground(Color.orange);
+        button13.setBackground(Color.orange);
+        button6.setBackground(Color.orange);
+        button14.setBackground(Color.orange);
+        button7.setBackground(Color.orange);
+        button15.setBackground(Color.orange);
+        button8.setBackground(Color.orange);
+        button16.setBackground(Color.orange);
+
+        // Addar knappar till panelen som ligger på boarden. boardPanelvariabeln är själva spelplanen.
+
+        boardPanel.add(button1);
+        boardPanel.add(button2);
+        boardPanel.add(button3);
+        boardPanel.add(button4);
+        boardPanel.add(button5);
+        boardPanel.add(button6);
+        boardPanel.add(button7);
+        boardPanel.add(button8);
+        boardPanel.add(button9);
+        boardPanel.add(button10);
+        boardPanel.add(button11);
+        boardPanel.add(button12);
+        boardPanel.add(button13);
+        boardPanel.add(button14);
+        boardPanel.add(button15);
+        boardPanel.add(button16);
+
+        button1.setEnabled(true);
+
+
+        // Avgör sizen på framen och att den programmet avslutas när man stänger ner det.
+
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setSize(450, 400);
+        frame.setResizable(false);
+        frame.add(container);
+        frame.add(boardPanel);
+        frame.add(meny);
+        frame.setVisible(true);
+
+
+        // Logik till knapparna
+        button1.addActionListener(this);
+        button2.addActionListener(this);
+        cancel.addActionListener(this);
+        newGame.addActionListener(this);
+
+
+        button3.addActionListener(this);
+        button4.addActionListener(this);
+        button5.addActionListener(this);
+        button6.addActionListener(this);
+        button7.addActionListener(this);
+        button8.addActionListener(this);
+        button9.addActionListener(this);
+        button10.addActionListener(this);
+        button11.addActionListener(this);
+        button12.addActionListener(this);
+        button13.addActionListener(this);
+        button14.addActionListener(this);
+        button15.addActionListener(this);
+        button16.addActionListener(this);
                 
-                button1.setEnabled(true);
+                /*
+                button1.addActionListener(new ActionListener() {
+                    
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource() == button1){
+
+                        }
+                        else {
+                        }
+
+                    }
+
+                
+
+                });*/
+    }
 
 
-                // Avgör sizen på framen och att den programmet avslutas när man stänger ner det.
-
-                frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                frame.setSize(450,400);
-                frame.setResizable(false);
-                frame.add(container);
-                frame.add(boardPanel);
-                frame.add(meny);
-                frame.setVisible(true);
-
-
-                // Logik till knapparna
-                button1.addActionListener(this);
-                button2.addActionListener(this);
-                cancel.addActionListener(this);
-                newGame.addActionListener(this);
+    
+    public void resetCardButton() {
+        lastButtonPressed = null;
+        previousCard = null;
+    }
+    
+    public void hideCards(JButton thisButton) {
+        System.out.println("No match!");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        lastButtonPressed.setIcon(null);
+        thisButton.setIcon(null);
+        
+        this.resetCardButton();
+    }
+
+    public void disableCards(JButton thisButton){
+        System.out.println("Match!");
+        
+        lastButtonPressed.setEnabled(false);
+        thisButton.setEnabled(false);
+
+        this.resetCardButton();
+    }
+
+
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button1) {
-            button1.setIcon(mixedDeck[0]);
+        JButton activeButton = (JButton) e.getSource();
+
+        if(activeButton.equals(lastButtonPressed)){
+            System.out.println("You already turned this card");
+            return;
         }
+
 
         if (e.getSource() == button2) {
             button2.setEnabled(false);
+
+        if (activeButton.equals(button1)) {
+            button1.setIcon(mixedCardDeck[0]);
+            if(mixedCardDeck[0].toString().equals(previousCard)) {
+                this.disableCards(button1);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[0].toString().equals(previousCard)){
+                this.hideCards(button1);
+
+            }
+            else{
+            previousCard = mixedCardDeck[0].toString();
+            lastButtonPressed = activeButton;
+            }
+             
+        }
+        else if (activeButton.equals(button2)) {
+            button2.setIcon(mixedCardDeck[1]);
+            if(mixedCardDeck[1].toString().equals(previousCard)) {
+                this.disableCards(button2);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[1].toString().equals(previousCard)){
+                this.hideCards(button2);
+            }
+            else{
+            previousCard = mixedCardDeck[1].toString();
+            lastButtonPressed = activeButton;
+            }
+        }
+
+        else if (activeButton.equals(button3)) {
+            button3.setIcon(mixedCardDeck[2]);
+            if(mixedCardDeck[2].toString().equals(previousCard)) {
+                this.disableCards(button3);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[2].toString().equals(previousCard)){
+                this.hideCards(button3);
+            }
+            else{
+            previousCard = mixedCardDeck[2].toString();
+            lastButtonPressed = activeButton;
+            }
+        }
+
+        else if (activeButton.equals(button4)) {
+            button4.setIcon(mixedCardDeck[3]);
+            if(mixedCardDeck[3].toString().equals(previousCard)) {
+                this.disableCards(button4);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[3].toString().equals(previousCard)){
+                this.hideCards(button4);
+            }
+            else{
+            previousCard = mixedCardDeck[3].toString();
+            lastButtonPressed = activeButton;
+            }
+
         }
 
         if (e.getSource() == cancel){
@@ -176,4 +340,6 @@ public class Buttons extends JFrame implements ActionListener {
     }
 
 
+
+    }
 }
