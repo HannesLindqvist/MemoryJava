@@ -184,12 +184,12 @@ public class Buttons extends JFrame implements ActionListener {
 
 
         // Logik till knapparna
-        button1.addActionListener(this);
-        button2.addActionListener(this);
+
         cancel.addActionListener(this);
         newGame.addActionListener(this);
 
-
+        button1.addActionListener(this);
+        button2.addActionListener(this);
         button3.addActionListener(this);
         button4.addActionListener(this);
         button5.addActionListener(this);
@@ -204,26 +204,9 @@ public class Buttons extends JFrame implements ActionListener {
         button14.addActionListener(this);
         button15.addActionListener(this);
         button16.addActionListener(this);
-                
-                /*
-                button1.addActionListener(new ActionListener() {
-                    
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource() == button1){
 
-                        }
-                        else {
-                        }
-
-                    }
-
-                
-
-                });*/
     }
 
-
-    
     public void resetCardButton() {
         lastButtonPressed = null;
         previousCard = null;
@@ -326,11 +309,12 @@ public class Buttons extends JFrame implements ActionListener {
             }
 
         }
-
+            //Knapp till cancel som avslutar spelet
         if (e.getSource() == cancel){
-            frame.dispose();
-        }
+            frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        }
+            //Knapp till newgame som rebootar spelet
         if (e.getSource() == newGame){
             SwingUtilities.invokeLater(new LaunchMenu());
             frame.dispose();
