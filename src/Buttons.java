@@ -193,14 +193,10 @@ public class Buttons extends JFrame implements ActionListener {
     
     public void hideCards(JButton thisButton) {
         System.out.println("No match!");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         lastButtonPressed.setIcon(null);
         thisButton.setIcon(null);
         
+        this.sleep(); 
         this.resetCardButton();
     }
 
@@ -211,6 +207,14 @@ public class Buttons extends JFrame implements ActionListener {
         thisButton.setEnabled(false);
 
         this.resetCardButton();
+    }
+
+    public void sleep(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -225,6 +229,7 @@ public class Buttons extends JFrame implements ActionListener {
         //////////////////////////////////////////////////////////////////////
         // Button1                                                          //
         // Each button has its own if-statements but the logic is the same  // 
+        // Card shown on button when button is pressed                      //
         // Cards disabled if matched                                        // 
         // Cards hides if no match                                          // 
         // The selected Button and Card is saved to variables               //
