@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import java.util.ArrayList;
 
 public class Buttons extends JFrame implements ActionListener {
-    ImageIcon[] mixedDeck = Cards.mixDeck();
+    ImageIcon[] mixedCardDeck = Cards.mixDeck();
     
     JFrame frame = new JFrame();
     JPanel boardPanel = new JPanel();
@@ -86,22 +86,22 @@ public class Buttons extends JFrame implements ActionListener {
 
                 // Knappar/kort till memorybrädet.
 
-                button1.setIcon(mixedDeck[0]);
-                button2.setIcon(mixedDeck[1]);
-                button3.setIcon(mixedDeck[2]);
-                button4.setIcon(mixedDeck[3]);
-                button5.setIcon(mixedDeck[4]);
-                button6.setIcon(mixedDeck[5]);
-                button7.setIcon(mixedDeck[6]);
-                button8.setIcon(mixedDeck[7]);
-                button9.setIcon(mixedDeck[8]);
-                button10.setIcon(mixedDeck[9]);
-                button11.setIcon(mixedDeck[10]);
-                button12.setIcon(mixedDeck[11]);
-                button13.setIcon(mixedDeck[12]);
-                button14.setIcon(mixedDeck[13]);
-                button15.setIcon(mixedDeck[14]);
-                button16.setIcon(mixedDeck[15]);
+                button1.setIcon(mixedCardDeck[0]);
+                button2.setIcon(mixedCardDeck[1]);
+                button3.setIcon(mixedCardDeck[2]);
+                button4.setIcon(mixedCardDeck[3]);
+                button5.setIcon(mixedCardDeck[4]);
+                button6.setIcon(mixedCardDeck[5]);
+                button7.setIcon(mixedCardDeck[6]);
+                button8.setIcon(mixedCardDeck[7]);
+                button9.setIcon(mixedCardDeck[8]);
+                button10.setIcon(mixedCardDeck[9]);
+                button11.setIcon(mixedCardDeck[10]);
+                button12.setIcon(mixedCardDeck[11]);
+                button13.setIcon(mixedCardDeck[12]);
+                button14.setIcon(mixedCardDeck[13]);
+                button15.setIcon(mixedCardDeck[14]);
+                button16.setIcon(mixedCardDeck[15]);
 
                 // Menyval
                 JPanel meny = new JPanel();
@@ -215,72 +215,74 @@ public class Buttons extends JFrame implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
-        JButton selected = (JButton) e.getSource();
+        JButton activeButton = (JButton) e.getSource();
 
-        if(selected.equals(lastButtonPressed)){
+        if(activeButton.equals(lastButtonPressed)){
             System.out.println("You already turned this card");
             return;
         }
 
-        if (selected.equals(button1)) {
-            button1.setIcon(mixedDeck[0]);
-            if(mixedDeck[0].toString().equals(previousCard)) {
+        if (activeButton.equals(button1)) {
+            button1.setIcon(mixedCardDeck[0]);
+            if(mixedCardDeck[0].toString().equals(previousCard)) {
                 this.disableCards(button1);
                 return;
             }
-            if (previousCard != null && !mixedDeck[0].toString().equals(previousCard)){
+            if (previousCard != null && !mixedCardDeck[0].toString().equals(previousCard)){
                 this.hideCards(button1);
 
             }
             else{
-            previousCard = mixedDeck[0].toString();
-            lastButtonPressed = selected;
+            previousCard = mixedCardDeck[0].toString();
+            lastButtonPressed = activeButton;
             }
              
         }
-        else if (e.getSource() == button2) {
-            button2.setIcon(mixedDeck[1]);
-            if(mixedDeck[1].toString().equals(previousCard)) {
+        else if (activeButton.equals(button2)) {
+            button2.setIcon(mixedCardDeck[1]);
+            if(mixedCardDeck[1].toString().equals(previousCard)) {
                 this.disableCards(button2);
                 return;
             }
-            if (previousCard != null && !mixedDeck[1].toString().equals(previousCard)){
+            if (previousCard != null && !mixedCardDeck[1].toString().equals(previousCard)){
                 this.hideCards(button2);
             }
             else{
-            previousCard = mixedDeck[1].toString();
-            lastButtonPressed = selected;
+            previousCard = mixedCardDeck[1].toString();
+            lastButtonPressed = activeButton;
             }
         }
 
-        else if (e.getSource() == button3) {
-            button3.setIcon(mixedDeck[2]);
-            if(mixedDeck[2].toString().equals(previousCard)) {
+        else if (activeButton.equals(button3)) {
+            button3.setIcon(mixedCardDeck[2]);
+            if(mixedCardDeck[2].toString().equals(previousCard)) {
                 this.disableCards(button3);
                 return;
             }
-            if (previousCard != null && !mixedDeck[2].toString().equals(previousCard)){
+            if (previousCard != null && !mixedCardDeck[2].toString().equals(previousCard)){
                 this.hideCards(button3);
             }
             else{
-            previousCard = mixedDeck[2].toString();
-            lastButtonPressed = selected;
+            previousCard = mixedCardDeck[2].toString();
+            lastButtonPressed = activeButton;
             }
         }
 
-        else if (e.getSource() == button4) {
-            button4.setIcon(mixedDeck[3]);
-            if(mixedDeck[3].toString().equals(previousCard)) {
+        else if (activeButton.equals(button4)) {
+            button4.setIcon(mixedCardDeck[3]);
+            if(mixedCardDeck[3].toString().equals(previousCard)) {
                 this.disableCards(button4);
                 return;
             }
-            if (previousCard != null && !mixedDeck[3].toString().equals(previousCard)){
+            if (previousCard != null && !mixedCardDeck[3].toString().equals(previousCard)){
                 this.hideCards(button4);
             }
             else{
-            previousCard = mixedDeck[3].toString();
-            lastButtonPressed = selected;
+            previousCard = mixedCardDeck[3].toString();
+            lastButtonPressed = activeButton;
             }
+            
+
         }
 
 
