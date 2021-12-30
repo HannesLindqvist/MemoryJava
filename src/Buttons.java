@@ -193,13 +193,13 @@ public class Buttons extends JFrame implements ActionListener {
 
     public void hideCards(JButton thisButton) {
         System.out.println("No match!");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         lastButtonPressed.setIcon(null);
         thisButton.setIcon(null);
+
+
+
+        
+        this.sleep(); 
 
         this.resetCardButton();
     }
@@ -213,15 +213,31 @@ public class Buttons extends JFrame implements ActionListener {
         this.resetCardButton();
     }
 
+    public void sleep(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void actionPerformed(ActionEvent e) {
-        JButton activeButton = (JButton) e.getSource();
+        JButton activeButton = (JButton) e.getSource();                // This button is the same as the one being pressed
 
+        // If same button is pressed twice, do nothing
         if(activeButton.equals(lastButtonPressed)){
-            System.out.println("You already turned this card");
             return;
-        }
 
+        }
+        //////////////////////////////////////////////////////////////////////
+        // Button1                                                          //
+        // Each button has its own if-statements but the logic is the same  // 
+        // Card shown on button when button is pressed                      //
+        // Cards disabled if matched                                        // 
+        // Cards hides if no match                                          // 
+        // The selected Button and Card is saved to variables               //
+        //////////////////////////////////////////////////////////////////////
         if (activeButton.equals(button1)) {
             button1.setIcon(mixedCardDeck[0]);
             if(mixedCardDeck[0].toString().equals(previousCard)) {
@@ -238,6 +254,7 @@ public class Buttons extends JFrame implements ActionListener {
             }
 
         }
+        // Button2
         else if (activeButton.equals(button2)) {
             button2.setIcon(mixedCardDeck[1]);
             if(mixedCardDeck[1].toString().equals(previousCard)) {
@@ -253,6 +270,7 @@ public class Buttons extends JFrame implements ActionListener {
             }
         }
 
+        // Button3
         else if (activeButton.equals(button3)) {
             button3.setIcon(mixedCardDeck[2]);
             if(mixedCardDeck[2].toString().equals(previousCard)) {
@@ -268,6 +286,7 @@ public class Buttons extends JFrame implements ActionListener {
             }
         }
 
+        // Button4
         else if (activeButton.equals(button4)) {
             button4.setIcon(mixedCardDeck[3]);
             if(mixedCardDeck[3].toString().equals(previousCard)) {
@@ -278,15 +297,219 @@ public class Buttons extends JFrame implements ActionListener {
                 this.hideCards(button4);
             }
             else{
+
                 previousCard = mixedCardDeck[3].toString();
                 lastButtonPressed = activeButton;
             }
 
 
+            previousCard = mixedCardDeck[3].toString();
+            lastButtonPressed = activeButton;
+            } 
+
+
+        // Button5 
+        else if (activeButton.equals(button5)) {
+            button5.setIcon(mixedCardDeck[4]);
+            if(mixedCardDeck[4].toString().equals(previousCard)) {
+                this.disableCards(button5);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[4].toString().equals(previousCard)){
+                this.hideCards(button5);
+            }
+            else{
+            previousCard = mixedCardDeck[4].toString();
+            lastButtonPressed = activeButton;
+            }
         }
 
+        // Button6 
+        else if (activeButton.equals(button6)) {
+            button6.setIcon(mixedCardDeck[5]);
+            if(mixedCardDeck[5].toString().equals(previousCard)) {
+                this.disableCards(button6);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[5].toString().equals(previousCard)){
+                this.hideCards(button6);
+            }
+            else{
+            previousCard = mixedCardDeck[5].toString();
+            lastButtonPressed = activeButton;
+            }
+        } 
 
+        // Button7
+        else if (activeButton.equals(button7)) {
+            button7.setIcon(mixedCardDeck[6]);
+            if(mixedCardDeck[6].toString().equals(previousCard)) {
+                this.disableCards(button7);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[6].toString().equals(previousCard)){
+                this.hideCards(button7);
+            }
+            else{
+            previousCard = mixedCardDeck[6].toString();
+            lastButtonPressed = activeButton;
+            }
+        } 
+
+
+        // Button8
+        else if (activeButton.equals(button8)) {
+            button8.setIcon(mixedCardDeck[7]);
+            if(mixedCardDeck[7].toString().equals(previousCard)) {
+                this.disableCards(button8);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[7].toString().equals(previousCard)){
+                this.hideCards(button8);
+            }
+            else{
+            previousCard = mixedCardDeck[7].toString();
+            lastButtonPressed = activeButton;
+            }
+        }
+
+        // Button9
+        else if (activeButton.equals(button9)) {
+            button9.setIcon(mixedCardDeck[8]);
+            if(mixedCardDeck[8].toString().equals(previousCard)) {
+                this.disableCards(button9);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[8].toString().equals(previousCard)){
+                this.hideCards(button9);
+            }
+            else{
+            previousCard = mixedCardDeck[8].toString();
+            lastButtonPressed = activeButton;
+            }
+        } 
+
+        // Button10
+        else if (activeButton.equals(button10)) {
+            button10.setIcon(mixedCardDeck[9]);
+            if(mixedCardDeck[9].toString().equals(previousCard)) {
+                this.disableCards(button10);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[9].toString().equals(previousCard)){
+                this.hideCards(button10);
+            }
+            else{
+            previousCard = mixedCardDeck[9].toString();
+            lastButtonPressed = activeButton;
+            }
+        } 
+
+        // Button11
+        else if (activeButton.equals(button11)) {
+            button11.setIcon(mixedCardDeck[10]);
+            if(mixedCardDeck[10].toString().equals(previousCard)) {
+                this.disableCards(button11);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[10].toString().equals(previousCard)){
+                this.hideCards(button11);
+            }
+            else{
+            previousCard = mixedCardDeck[10].toString();
+            lastButtonPressed = activeButton;
+            }
+        }
+        
+        // Button12
+        else if (activeButton.equals(button12)) {
+            button12.setIcon(mixedCardDeck[11]);
+            if(mixedCardDeck[11].toString().equals(previousCard)) {
+                this.disableCards(button12);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[11].toString().equals(previousCard)){
+                this.hideCards(button12);
+            }
+            else{
+            previousCard = mixedCardDeck[11].toString();
+            lastButtonPressed = activeButton;
+            }
+        } 
+        
+        // Button13
+        else if (activeButton.equals(button13)) {
+            button13.setIcon(mixedCardDeck[12]);
+            if(mixedCardDeck[12].toString().equals(previousCard)) {
+                this.disableCards(button13);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[12].toString().equals(previousCard)){
+                this.hideCards(button13);
+            }
+            else{
+            previousCard = mixedCardDeck[12].toString();
+            lastButtonPressed = activeButton;
+            }
+        } 
+        
+        // Button14
+        else if (activeButton.equals(button14)) {
+            button14.setIcon(mixedCardDeck[13]);
+            if(mixedCardDeck[13].toString().equals(previousCard)) {
+                this.disableCards(button14);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[13].toString().equals(previousCard)){
+                this.hideCards(button14);
+            }
+            else{
+            previousCard = mixedCardDeck[13].toString();
+            lastButtonPressed = activeButton;
+            }
+        } 
+        
+        // Button15
+        else if (activeButton.equals(button15)) {
+            button15.setIcon(mixedCardDeck[14]);
+            if(mixedCardDeck[14].toString().equals(previousCard)) {
+                this.disableCards(button15);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[14].toString().equals(previousCard)){
+                this.hideCards(button15);
+            }
+            else{
+            previousCard = mixedCardDeck[14].toString();
+            lastButtonPressed = activeButton;
+            }
+        } 
+        
+        // Button16
+        else if (activeButton.equals(button16)) {
+            button16.setIcon(mixedCardDeck[15]);
+            if(mixedCardDeck[15].toString().equals(previousCard)) {
+                this.disableCards(button16);
+                return;
+            }
+            if (previousCard != null && !mixedCardDeck[15].toString().equals(previousCard)){
+                this.hideCards(button16);
+            }
+            else{
+            previousCard = mixedCardDeck[15].toString();
+            lastButtonPressed = activeButton;
+            }
+        }
+        
     }
+
+
+
+
+
+
+
+
 
 
 }
