@@ -490,7 +490,10 @@ public class Buttons extends JFrame implements ActionListener {
 
             // Logik for newgame button and Exit
         if (activeButton.equals(newGame)){
+            frame.dispose();
             SwingUtilities.invokeLater(new LaunchMenu());
+
+
         }
         if (activeButton.equals(cancel)){
             frame.dispose();
