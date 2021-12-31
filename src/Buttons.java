@@ -38,6 +38,9 @@ public class Buttons extends JFrame implements ActionListener {
     JButton button14 = new JButton();
     JButton button15 = new JButton();
     JButton button16 = new JButton();
+    JButton newGame = new JButton("Nytt Spel");
+    JButton cancel = new JButton("Avsluta");
+
 
     JButton lastButtonPressed = null;
     String previousCard = null;
@@ -105,8 +108,7 @@ public class Buttons extends JFrame implements ActionListener {
 
         // Menyval
         JPanel meny = new JPanel();
-        JButton newGame = new JButton("Nytt Spel");
-        JButton cancel = new JButton("Avsluta");
+
         meny.add(newGame);
         meny.add(cancel);
 
@@ -168,22 +170,10 @@ public class Buttons extends JFrame implements ActionListener {
         button14.addActionListener(this);
         button15.addActionListener(this);
         button16.addActionListener(this);
-
-                /*
-                button1.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource() == button1){
-
-                        }
-                        else {
-                        }
-
-                    }
+        cancel.addActionListener(this);
+        newGame.addActionListener(this);
 
 
-
-                });*/
     }
 
     public void resetCardButton() {
@@ -197,10 +187,7 @@ public class Buttons extends JFrame implements ActionListener {
         thisButton.setIcon(null);
 
 
-
-        
         this.sleep(); 
-
         this.resetCardButton();
     }
 
@@ -499,6 +486,14 @@ public class Buttons extends JFrame implements ActionListener {
             previousCard = mixedCardDeck[15].toString();
             lastButtonPressed = activeButton;
             }
+        }
+
+            // Logik for newgame button and Exit
+        if (activeButton.equals(newGame)){
+            SwingUtilities.invokeLater(new LaunchMenu());
+        }
+        if (activeButton.equals(cancel)){
+            frame.dispose();
         }
         
     }
