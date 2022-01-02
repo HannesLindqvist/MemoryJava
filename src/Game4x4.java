@@ -189,14 +189,9 @@ public class Game4x4 extends JFrame implements ActionListener{
         System.out.println("No match!");
         lastButtonPressed.setIcon(null);
         thisButton.setIcon(null);
-        if (player1.active){
-            player1.setActive(false);
-            player2.setActive(true);
-        } else {
-            player1.setActive(true);
-            player2.setActive(false);
-        }
 
+
+        this.changePlayer();
         System.out.println("PLayer 1 turn : " + player1.active);
         System.out.println("PLayer 2 turn : " + player2.active);
 
@@ -210,21 +205,43 @@ public class Game4x4 extends JFrame implements ActionListener{
         System.out.println("score is ");
         System.out.println("PLayer 1 turn : " + player1.active);
         System.out.println("PLayer 2 turn : " + player2.active);
-        if (player1.active){
-            player1.addPoints();
-            player1Label.setText("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
-        } else{
-            player2.addPoints();
-            player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
-        }
 
 
         lastButtonPressed.setEnabled(false);
         thisButton.setEnabled(false);
 
+        this.addPoint();
+        this.updateScoreboard();
         this.resetCardButton();
         
     }
+    
+
+    public void changePlayer() {
+        if (player1.active){
+            player1.setActive(false);
+            player2.setActive(true);
+        } else {
+            player1.setActive(true);
+            player2.setActive(false);
+        }
+    }
+    
+    
+    public void addPoint() {
+        if (player1.active){
+            player1.addPoints();
+        } else{
+            player2.addPoints();
+        }
+    }
+
+
+    public void updateScoreboard() {
+        player1Label.setText("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
+        player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
+    }
+
 
     public void sleep(){
         try {
@@ -243,8 +260,9 @@ public class Game4x4 extends JFrame implements ActionListener{
             return;
 
         }
+
         //////////////////////////////////////////////////////////////////////
-        // iconButton1                                                          //
+        // iconButton1                                                      //
         // Each button has its own if-statements but the logic is the same  // 
         // Card shown on button when button is pressed                      //
         // Cards disabled if matched                                        // 
