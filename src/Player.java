@@ -1,25 +1,26 @@
+import javax.swing.*;
+
 public class Player {
-    boolean player1 = true;
-    boolean player2 = false;
+    String name;
+    int points;
+    boolean active;
 
-    int cardsSelected = 0;
-    String firstCard = null;
-    String secondCard = null;
-    int points = 0;
-
-    /*Player() {
-        if (player1 != match) {
-            player1 = false;
-        } else {
-            player2 = true;
-        }
-
-        if (player2 != match) {
-            player2 = false;
-        } else {
-            player1 = true;
-        }
+    public Player (String name) {
+        // check if icons match
+         this.name = name;
+         this.points = 0;
+         active = false;
     }
 
-     */
+    public int getPoints(){
+        return this.points;
+    }
+
+    public void addPoints(){
+        this.points++;
+    }
+
+    public void setActive(boolean active){
+        this.active = active;
+    }
 }

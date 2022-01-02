@@ -65,7 +65,8 @@ public class LaunchMenu extends JFrame implements Runnable {
 
         if (gameSize.equals(optionsToChoose[0])){
             frame.dispose(); // Quits frame
-            new Buttons();
+            Game4x4 game4x4 = new Game4x4();
+            game4x4.startGame();
         } else {
             frame.dispose();
             new Game6x6();}
