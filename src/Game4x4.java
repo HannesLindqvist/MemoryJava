@@ -19,8 +19,8 @@ public class Game4x4 extends JFrame implements ActionListener{
     EtchedBorder etch = new EtchedBorder();
     JPanel playersContainer = new JPanel();
     
-    JLabel player1Label = new JLabel("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
-    JLabel player2Label = new JLabel("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
+    JLabel player1Label = new JLabel("<html>Player 1<br>" + player1.name + "<br>Points: " + player1.points + "</html>");
+    JLabel player2Label = new JLabel("<html>Player 2<br>" + player2.name + "<br>Points: " + player2.points + "</html>");
     
     JPanel playerPanel1 = new JPanel();
     JPanel playerPanel2 = new JPanel();
@@ -73,8 +73,8 @@ public class Game4x4 extends JFrame implements ActionListener{
         player1Label.setFont(new Font("Verdana", 1,20));
 
         player2Label.setFont(new Font("Verdana", 1,20));
-        playerPanel1.setBackground(Color.lightGray);
-        playerPanel2.setBackground(Color.GREEN);
+        playerPanel1.setBackground(Color.GREEN);
+        playerPanel2.setBackground(Color.lightGray);
 
         playerPanel1.setPreferredSize(new Dimension(120,150));
         playerPanel2.setPreferredSize(new Dimension(120,150));
@@ -221,9 +221,14 @@ public class Game4x4 extends JFrame implements ActionListener{
         if (player1.active){
             player1.setActive(false);
             player2.setActive(true);
+            playerPanel2.setBackground(Color.GREEN);
+            playerPanel1.setBackground(Color.lightGray);
         } else {
             player1.setActive(true);
             player2.setActive(false);
+            playerPanel1.setBackground(Color.GREEN);
+            playerPanel2.setBackground(Color.lightGray);
+            
         }
     }
     
@@ -238,8 +243,8 @@ public class Game4x4 extends JFrame implements ActionListener{
 
 
     public void updateScoreboard() {
-        player1Label.setText("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
-        player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
+        player1Label.setText("<html>Player 1<br>" + player1.name + "<br>Points: " + player1.points + "</html>");
+        player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points: " + player2.points + "</html>");
     }
 
 
@@ -265,7 +270,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         // iconButton1                                                      //
         // Each button has its own if-statements but the logic is the same  // 
         // Card shown on button when button is pressed                      //
-        // Cards disabled if matched                                        // 
+        // Cards disabled if matched                                        //
         // Cards hides if no match                                          // 
         // The selected Button and Card is saved to variables               //
         //////////////////////////////////////////////////////////////////////
