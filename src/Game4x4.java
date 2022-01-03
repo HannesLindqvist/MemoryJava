@@ -48,6 +48,8 @@ public class Game4x4 extends JFrame implements ActionListener{
     JButton lastButtonPressed = null;
     String previousCard = null;
 
+     int totalPoints = 0;
+
 
     public Game4x4() {
 
@@ -234,17 +236,26 @@ public class Game4x4 extends JFrame implements ActionListener{
     
     
     public void addPoint() {
-        if (player1.active){
+        if (player1.active) {
             player1.addPoints();
-        } else{
+        } else {
             player2.addPoints();
         }
+        totalPoints = player1.points + player2.points;
+        if (totalPoints == 8)
+            gameOver();
     }
 
 
     public void updateScoreboard() {
         player1Label.setText("<html>Player 1<br>" + player1.name + "<br>Points: " + player1.points + "</html>");
         player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points: " + player2.points + "</html>");
+    }
+
+    public void gameOver(){
+        System.out.println("Game Over");
+
+
     }
 
 
@@ -259,6 +270,7 @@ public class Game4x4 extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         JButton activeButton = (JButton) e.getSource();                // This button is the same as the one being pressed
+
 
         // If same button is pressed twice, do nothing
         if(activeButton.equals(lastButtonPressed)){
@@ -547,4 +559,8 @@ public class Game4x4 extends JFrame implements ActionListener{
             frame.dispose();
         }
     }
+
+
+
+
 }
