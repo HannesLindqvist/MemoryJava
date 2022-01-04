@@ -75,8 +75,8 @@ public class Game4x4 extends JFrame implements ActionListener{
         player1Label.setFont(new Font("Verdana", 1,20));
 
         player2Label.setFont(new Font("Verdana", 1,20));
-        playerPanel1.setBackground(Color.lightGray);
-        playerPanel2.setBackground(Color.GREEN);
+        playerPanel1.setBackground(Color.GREEN);
+        playerPanel2.setBackground(Color.lightGray);
 
         playerPanel1.setPreferredSize(new Dimension(120,150));
         playerPanel2.setPreferredSize(new Dimension(120,150));
@@ -184,11 +184,11 @@ public class Game4x4 extends JFrame implements ActionListener{
         Timer timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                   // flip cards
-                  lastButtonPressed.setEnabled(false);
-                  thisButton.setEnabled(false);
-          
-                  updateScoreboard();
-                  resetCardButton();
+                lastButtonPressed.setEnabled(false);
+                thisButton.setEnabled(false);
+                addPoint();
+                updateScoreboard();
+                resetCardButton();
             }
         });
 
@@ -202,9 +202,13 @@ public class Game4x4 extends JFrame implements ActionListener{
         if (player1.active){
             player1.setActive(false);
             player2.setActive(true);
+            playerPanel1.setBackground(Color.lightGray);
+            playerPanel2.setBackground(Color.GREEN);
         } else {
             player1.setActive(true);
             player2.setActive(false);
+            playerPanel1.setBackground(Color.GREEN);
+            playerPanel2.setBackground(Color.lightGray);
         }
     }
     
@@ -223,14 +227,6 @@ public class Game4x4 extends JFrame implements ActionListener{
         player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
     }
 
-
-    public void sleep(){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public void actionPerformed(ActionEvent e) {
