@@ -185,24 +185,36 @@ public class Game4x4 extends JFrame implements ActionListener{
     }
 
     public void hideCards(JButton thisButton) {
-        lastButtonPressed.setIcon(null);
-        thisButton.setIcon(null);
 
+        Timer timer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            thisButton.setIcon(null);
+            lastButtonPressed.setIcon(null);
+            changePlayer();
+            resetCardButton();
+            }
+        });
 
-        this.changePlayer();
-
-        this.sleep(); 
-        this.resetCardButton();
+        timer.setRepeats(false);
+        timer.restart();
+        
     }
+
         // match
     public void disableCards(JButton thisButton){
+        Timer timer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                  // flip cards
+                  lastButtonPressed.setEnabled(false);
+                  thisButton.setEnabled(false);
+          
+                  updateScoreboard();
+                  resetCardButton();
+            }
+        });
 
-        lastButtonPressed.setEnabled(false);
-        thisButton.setEnabled(false);
-
-        this.addPoint();
-        this.updateScoreboard();
-        this.resetCardButton();
+        timer.setRepeats(false);
+        timer.restart();
         
     }
     
