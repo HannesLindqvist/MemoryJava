@@ -49,6 +49,7 @@ public class Game4x4 extends JFrame implements ActionListener{
     String previousCard = null;
 
     private int cardsVisible = 0;
+    int totalPoints = 0;
 
     public Game4x4() {
 
@@ -218,7 +219,12 @@ public class Game4x4 extends JFrame implements ActionListener{
         } else{
             player2.addPoints();
         }
+        totalPoints = player1.points + player2.points;
+        if (totalPoints == 8){
+            new GameOverClass();
+        }
     }
+
 
 
     public void updateScoreboard() {

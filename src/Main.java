@@ -10,6 +10,7 @@ public class Main implements ActionListener {
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(new LaunchMenu());
+        //new GameOverClass();
 
     }
     
