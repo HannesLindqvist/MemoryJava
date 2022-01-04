@@ -42,6 +42,7 @@ public class Game4x4 extends JFrame implements ActionListener{
     JButton iconButton15 = new JButton();
     JButton iconButton16 = new JButton();
     
+    JPanel menyPanel = new JPanel();
     JButton newGame = new JButton("Nytt Spel");
     JButton cancel = new JButton("Avsluta");
 
@@ -89,33 +90,9 @@ public class Game4x4 extends JFrame implements ActionListener{
         playersContainer.add(playerPanel1);
         playersContainer.add(playerPanel2);
 
-
-        // Knappar/kort till memorybrädet.
-
-        iconButton1.setIcon(mixedCardDeck[0]);
-        iconButton2.setIcon(mixedCardDeck[1]);
-        iconButton3.setIcon(mixedCardDeck[2]);
-        iconButton4.setIcon(mixedCardDeck[3]);
-        iconButton5.setIcon(mixedCardDeck[4]);
-        iconButton6.setIcon(mixedCardDeck[5]);
-        iconButton7.setIcon(mixedCardDeck[6]);
-        iconButton8.setIcon(mixedCardDeck[7]);
-        iconButton9.setIcon(mixedCardDeck[8]);
-        iconButton10.setIcon(mixedCardDeck[9]);
-        iconButton11.setIcon(mixedCardDeck[10]);
-        iconButton12.setIcon(mixedCardDeck[11]);
-        iconButton13.setIcon(mixedCardDeck[12]);
-        iconButton14.setIcon(mixedCardDeck[13]);
-        iconButton15.setIcon(mixedCardDeck[14]);
-        iconButton16.setIcon(mixedCardDeck[15]);
-
         // Menyval
-        JPanel menyPanel = new JPanel();
-
         menyPanel.add(newGame);
         menyPanel.add(cancel);
-
-
 
         // En viss typ av layout på knapparna, går enkelt att ändra.
 
