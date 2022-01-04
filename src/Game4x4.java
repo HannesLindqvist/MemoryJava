@@ -48,6 +48,7 @@ public class Game4x4 extends JFrame implements ActionListener{
     JButton lastButtonPressed = null;
     String previousCard = null;
 
+    private int cardsVisible = 0;
 
     public Game4x4() {
 
@@ -182,6 +183,7 @@ public class Game4x4 extends JFrame implements ActionListener{
     public void resetCardButton() {
         lastButtonPressed = null;
         previousCard = null;
+        cardsVisible = 0;
     }
 
     public void hideCards(JButton thisButton) {
@@ -258,10 +260,12 @@ public class Game4x4 extends JFrame implements ActionListener{
         JButton activeButton = (JButton) e.getSource();                // This button is the same as the one being pressed
 
         // If same button is pressed twice, do nothing
-        if(activeButton.equals(lastButtonPressed)){
+        if(activeButton.equals(lastButtonPressed))
             return;
 
-        }
+        if(cardsVisible == 2)
+            return;
+        cardsVisible += 1;
 
         //////////////////////////////////////////////////////////////////////
         // iconButton1                                                      //
