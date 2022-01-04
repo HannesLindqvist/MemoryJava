@@ -8,9 +8,8 @@ import javax.swing.ImageIcon;
 
 public class Game4x4 extends JFrame implements ActionListener{
 
-    Player player1 = new Player("Josip");
-    Player player2 = new Player("Mikael");
-
+    Player player1 = new Player("Hannes");
+    Player player2 = new Player("Mike");
 
     ImageIcon[] mixedCardDeck = Cards.mixDeck();
 
