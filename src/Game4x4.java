@@ -19,8 +19,8 @@ public class Game4x4 extends JFrame implements ActionListener{
     EtchedBorder etch = new EtchedBorder();
     JPanel playersContainer = new JPanel();
     
-    JLabel player1Label = new JLabel("<html>Player 1<br>" + player1.name + "<br>Points: " + player1.points + "</html>");
-    JLabel player2Label = new JLabel("<html>Player 2<br>" + player2.name + "<br>Points: " + player2.points + "</html>");
+    JLabel player1Label = new JLabel("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
+    JLabel player2Label = new JLabel("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
     
     JPanel playerPanel1 = new JPanel();
     JPanel playerPanel2 = new JPanel();
@@ -48,9 +48,6 @@ public class Game4x4 extends JFrame implements ActionListener{
     JButton lastButtonPressed = null;
     String previousCard = null;
 
-    int totalPoints = 0;
-    private int activeCards = 0;
-
 
     public Game4x4() {
 
@@ -76,8 +73,8 @@ public class Game4x4 extends JFrame implements ActionListener{
         player1Label.setFont(new Font("Verdana", 1,20));
 
         player2Label.setFont(new Font("Verdana", 1,20));
-        playerPanel1.setBackground(Color.GREEN);
-        playerPanel2.setBackground(Color.lightGray);
+        playerPanel1.setBackground(Color.lightGray);
+        playerPanel2.setBackground(Color.GREEN);
 
         playerPanel1.setPreferredSize(new Dimension(120,150));
         playerPanel2.setPreferredSize(new Dimension(120,150));
@@ -185,28 +182,20 @@ public class Game4x4 extends JFrame implements ActionListener{
     public void resetCardButton() {
         lastButtonPressed = null;
         previousCard = null;
-        activeCards = 0;
     }
 
     public void hideCards(JButton thisButton) {
-        System.out.println("No match!");
         lastButtonPressed.setIcon(null);
         thisButton.setIcon(null);
 
 
         this.changePlayer();
-        System.out.println("PLayer 1 turn : " + player1.active);
-        System.out.println("PLayer 2 turn : " + player2.active);
 
+        this.sleep(); 
         this.resetCardButton();
     }
         // match
     public void disableCards(JButton thisButton){
-        System.out.println("Match!");
-        System.out.println("score is ");
-        System.out.println("PLayer 1 turn : " + player1.active);
-        System.out.println("PLayer 2 turn : " + player2.active);
-
 
         lastButtonPressed.setEnabled(false);
         thisButton.setEnabled(false);
@@ -222,39 +211,25 @@ public class Game4x4 extends JFrame implements ActionListener{
         if (player1.active){
             player1.setActive(false);
             player2.setActive(true);
-            playerPanel2.setBackground(Color.GREEN);
-            playerPanel1.setBackground(Color.lightGray);
         } else {
             player1.setActive(true);
             player2.setActive(false);
-            playerPanel1.setBackground(Color.GREEN);
-            playerPanel2.setBackground(Color.lightGray);
-            
         }
     }
     
     
     public void addPoint() {
-        if (player1.active) {
+        if (player1.active){
             player1.addPoints();
-        } else {
+        } else{
             player2.addPoints();
         }
-        totalPoints = player1.points + player2.points;
-        if (totalPoints == 8)
-            gameOver();
     }
 
 
     public void updateScoreboard() {
-        player1Label.setText("<html>Player 1<br>" + player1.name + "<br>Points: " + player1.points + "</html>");
-        player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points: " + player2.points + "</html>");
-    }
-
-    public void gameOver(){
-        System.out.println("Game Over");
-
-
+        player1Label.setText("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
+        player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
     }
 
 
@@ -271,20 +246,16 @@ public class Game4x4 extends JFrame implements ActionListener{
         JButton activeButton = (JButton) e.getSource();                // This button is the same as the one being pressed
 
         // If same button is pressed twice, do nothing
-        if(activeButton.equals(lastButtonPressed))
+        if(activeButton.equals(lastButtonPressed)){
             return;
 
-        // When 2 cards are visible, do nothing when pressing next buttong 
-        if(activeCards == 2) 
-            return;
-        activeCards += 1;
-        
+        }
 
         //////////////////////////////////////////////////////////////////////
         // iconButton1                                                      //
         // Each button has its own if-statements but the logic is the same  // 
         // Card shown on button when button is pressed                      //
-        // Cards disabled if matched                                        //
+        // Cards disabled if matched                                        // 
         // Cards hides if no match                                          // 
         // The selected Button and Card is saved to variables               //
         //////////////////////////////////////////////////////////////////////
@@ -561,8 +532,4 @@ public class Game4x4 extends JFrame implements ActionListener{
             frame.dispose();
         }
     }
-
-
-
-
 }
