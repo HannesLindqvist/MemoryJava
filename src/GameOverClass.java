@@ -24,7 +24,7 @@ public class GameOverClass implements ActionListener {
         buttonQuit.setBackground(Color.GRAY);
         buttonNewGame.setBackground(Color.GRAY);
 
-        buttonQuit.addActionListener(new ActionListener() {
+        buttonNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SwingUtilities.invokeLater(new LaunchMenu());
@@ -34,15 +34,16 @@ public class GameOverClass implements ActionListener {
         });
 
 
-        buttonNewGame.addActionListener(new ActionListener() {
+        buttonQuit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
             }
         });
 
-        Container.add(buttonQuit);
         Container.add(buttonNewGame);
+        Container.add(buttonQuit);
+
 
 
         ImageIcon image = new ImageIcon("GameOverPic.png");
