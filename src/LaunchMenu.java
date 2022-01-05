@@ -11,7 +11,7 @@ public class LaunchMenu extends JFrame implements Runnable, ActionListener {
     Border border;
     ImageIcon gameLogo;
     JPanel logoPanel,playersPanel;
-    JButton nameButton1,nameButton2,playButton,exitButton;
+    JButton playButton,exitButton;
     JTextField player1Text,player2Text;
 
     @Override
@@ -64,8 +64,7 @@ public class LaunchMenu extends JFrame implements Runnable, ActionListener {
         playersPanel.add(player2Label);
         playersPanel.add(player2Text);
 
-        nameButton1 = new JButton("Submit player1 name");
-        nameButton2 = new JButton("Submit player2 name");
+
         playButton = new JButton("Press Play");
         exitButton = new JButton("Exit");
 
@@ -74,8 +73,7 @@ public class LaunchMenu extends JFrame implements Runnable, ActionListener {
 
         playButton.setPreferredSize(new Dimension(200,40));
         exitButton.setPreferredSize(new Dimension(200,40));
-        nameButton1.setPreferredSize(new Dimension(200,40));
-        nameButton2.setPreferredSize(new Dimension(200,40));
+
 
         JLabel iconlabel = new JLabel();
         ImageIcon icon = new ImageIcon("yoshi.png");
@@ -84,16 +82,14 @@ public class LaunchMenu extends JFrame implements Runnable, ActionListener {
         playButton.setIcon(icon);
         frame.add(logoPanel);
         logoPanel.add(playersPanel);
-        playersPanel.add(nameButton1);
-        playersPanel.add(nameButton2);
+
         playersPanel.add(playButton);
         playersPanel.add(exitButton);
 
 
 
         playersPanel.add(iconlabel);
-        nameButton1.addActionListener(this);
-        nameButton2.addActionListener(this);
+
         playButton.addActionListener(this);
         exitButton.addActionListener(this);
 
@@ -102,53 +98,15 @@ public class LaunchMenu extends JFrame implements Runnable, ActionListener {
         frame.setResizable(false);
 
 
-        /*String[] optionsToChoose = {"4x4 Game", "6x6 Game"};
-        String gameSize = (String) JOptionPane.showInputDialog(
-                null,
-                "Memory Game",
-                "Choose Game Size ",
-                JOptionPane.QUESTION_MESSAGE,s
-                image3,
-                optionsToChoose,
-                optionsToChoose[0]);
 
-         */
-
-        /*image3 = new ImageIcon("logo_mem.png");
-        String[] optionsToChoose = {"4x4 Game", "6x6 Game"};
-        String gameSize = (String) JOptionPane.showInputDialog(
-                null,
-                "Memory Game",
-                "Choose Game Size ",
-                JOptionPane.QUESTION_MESSAGE,
-                image3,
-                optionsToChoose,
-                optionsToChoose[0]);
-
-        if (gameSize.equals(optionsToChoose[0])){
-            frame.dispose(); // Quits frame
-            Game4x4 game4x4 = new Game4x4();
-            game4x4.startGame();
-        } else {
-            frame.dispose();
-            new Game6x6();}
-
-
-         */
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==nameButton1){
-            player1Text.getText();
-            System.out.println(player1Text.getText());
-        }
-        if (e.getSource()==nameButton2){
-            player2Text.getText();
-            System.out.println(player2Text.getText());
-        }
+
         if (e.getSource()==playButton){
-            new Game4x4();
+            new Game4x4(player1Text.getText(), player2Text.getText());
+
             frame.dispose();
         }
         if (e.getSource()==exitButton){
