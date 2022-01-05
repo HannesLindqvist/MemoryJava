@@ -152,17 +152,20 @@ public class Game4x4 extends JFrame implements ActionListener{
         newGame.addActionListener(this);
 
     }
-        // Player 1 active
+    
+    // Player 1 active
     public void startGame() {
         player1.setActive(true);
     }
 
+    // reset history
     public void resetCardButton() {
         lastButtonPressed = null;
         previousCard = null;
         cardsVisible = 0;
     }
 
+    // hide cards
     public void hideCards(JButton thisButton) {
 
         Timer timer = new Timer(1000, new ActionListener() {
@@ -179,7 +182,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         
     }
 
-        // match
+    // disable buttons/cards
     public void disableCards(JButton thisButton){
         Timer timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -197,7 +200,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         
     }
     
-
+    // change active player
     public void changePlayer() {
         if (player1.active){
             player1.setActive(false);
@@ -212,7 +215,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         }
     }
     
-    
+    // add point to active player
     public void addPoint() {
         if (player1.active){
             player1.addPoints();
@@ -226,7 +229,7 @@ public class Game4x4 extends JFrame implements ActionListener{
     }
 
 
-
+    // Update scoreboard with new points
     public void updateScoreboard() {
         player1Label.setText("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
         player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
@@ -241,7 +244,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         if(activeButton.equals(lastButtonPressed))
             return;
 
-        if(cardsVisible == 2)
+        if(cardsVisible >= 2)
             return;
         cardsVisible += 1;
 
