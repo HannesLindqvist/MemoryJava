@@ -1,13 +1,17 @@
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+import javax.swing.plaf.synth.SynthScrollBarUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.Visibility;
+
 import javax.swing.ImageIcon;
 
 public class Game4x4 extends JFrame implements ActionListener{
 
+    
     Player player1 = new Player("Hannes");
     Player player2 = new Player("Mike");
 
@@ -52,6 +56,7 @@ public class Game4x4 extends JFrame implements ActionListener{
     int totalPoints = 0;
 
     public Game4x4() {
+        startGame();
 
         // Grundramen till spelet.
         frame.setTitle("Detta ska bli ett memoryspel");
@@ -66,6 +71,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         boardPanel.setPreferredSize(new Dimension(300,300));
         boardPanel.setBackground(Color.lightGray);
         boardPanel.setLayout(new GridLayout(4,4));
+        
 
 
         // Layout på knappar och paneler. Måste vara ovanför kanpparna eller panelerna för att funka.
@@ -236,17 +242,26 @@ public class Game4x4 extends JFrame implements ActionListener{
     }
 
 
+    public void printInfo() {
+        System.out.println("Player1 active: " + player1.active);
+        System.out.println("Player2 active: " + player2.active);
+        System.out.println("lastButtonPressed: " + lastButtonPressed);
+        System.out.println("previousCard: " + previousCard);
+        System.out.println("cardsVisible: " + cardsVisible);
+    } 
 
     public void actionPerformed(ActionEvent e) {
+        cardsVisible += 1;
         JButton activeButton = (JButton) e.getSource();                // This button is the same as the one being pressed
 
         // If same button is pressed twice, do nothing
         if(activeButton.equals(lastButtonPressed))
             return;
 
-        if(cardsVisible >= 2)
+        this.printInfo();
+        
+        if(cardsVisible > 2)
             return;
-        cardsVisible += 1;
 
         //////////////////////////////////////////////////////////////////////
         // iconButton1                                                      //
