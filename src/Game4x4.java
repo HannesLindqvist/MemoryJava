@@ -11,9 +11,8 @@ import javax.swing.ImageIcon;
 
 public class Game4x4 extends JFrame implements ActionListener{
 
-    
-    Player player1 = new Player("Hannes");
-    Player player2 = new Player("Mike");
+    Player player1 = null;
+    Player player2 = null;
 
     ImageIcon[] mixedCardDeck = Cards.mixDeck();
 
@@ -22,8 +21,8 @@ public class Game4x4 extends JFrame implements ActionListener{
     EtchedBorder etch = new EtchedBorder();
     JPanel playersContainer = new JPanel();
     
-    JLabel player1Label = new JLabel("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
-    JLabel player2Label = new JLabel("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
+    JLabel player1Label = null;
+    JLabel player2Label = null;
     
     JPanel playerPanel1 = new JPanel();
     JPanel playerPanel2 = new JPanel();
@@ -55,7 +54,17 @@ public class Game4x4 extends JFrame implements ActionListener{
     private int cardsVisible = 0;
     int totalPoints = 0;
 
-    public Game4x4() {
+
+
+
+
+    public Game4x4(String player1Name, String player2Name) {
+
+        player1 = new Player(player1Name);
+        player2 = new Player(player2Name);
+
+        player1Label = new JLabel("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
+        player2Label = new JLabel("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
         startGame();
 
         // Grundramen till spelet.
@@ -158,7 +167,8 @@ public class Game4x4 extends JFrame implements ActionListener{
         newGame.addActionListener(this);
 
     }
-    
+
+
     // Player 1 active
     public void startGame() {
         player1.setActive(true);

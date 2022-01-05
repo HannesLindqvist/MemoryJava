@@ -10,8 +10,8 @@ public class GameOverClass implements ActionListener {
 
     JPanel Container = new JPanel();
 
-    JButton button = new JButton("New Game");
-    JButton button2 = new JButton("Quit");
+    JButton buttonNewGame = new JButton("New Game");
+    JButton buttonQuit = new JButton("Quit");
 
 
     GameOverClass(){
@@ -21,27 +21,28 @@ public class GameOverClass implements ActionListener {
 
 
 
-        button.setBackground(Color.GRAY);
-        button2.setBackground(Color.GRAY);
+        buttonQuit.setBackground(Color.GRAY);
+        buttonNewGame.setBackground(Color.GRAY);
 
-        button.addActionListener(new ActionListener() {
+        buttonQuit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SwingUtilities.invokeLater(new LaunchMenu());
                 frame.dispose();
+
             }
         });
 
 
-        button2.addActionListener(new ActionListener() {
+        buttonNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
             }
         });
 
-        Container.add(button);
-        Container.add(button2);
+        Container.add(buttonQuit);
+        Container.add(buttonNewGame);
 
 
         ImageIcon image = new ImageIcon("GameOverPic.png");
