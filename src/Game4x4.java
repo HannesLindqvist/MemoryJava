@@ -337,10 +337,7 @@ public class Game4x4 extends JFrame implements ActionListener{
                 lastButtonPressed = activeButton;
             }
 
-
-            previousCard = mixedCardDeck[3].toString();
-            lastButtonPressed = activeButton;
-            } 
+        } 
 
 
         // iconButton5 
