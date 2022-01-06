@@ -105,7 +105,7 @@ public class LaunchMenu extends JFrame implements Runnable, ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource()==playButton){
-            new Game4x4(player1Text.getText(), player2Text.getText());
+            //new BoardView();
 
             frame.dispose();
         }

@@ -6,26 +6,32 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.Visibility;
+import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 
-public class Game4x4 extends JFrame implements ActionListener{
-
-    Player player1 = null;
-    Player player2 = null;
-
-    ImageIcon[] mixedCardDeck = Cards.mixDeck();
+public class BoardView extends JFrame implements ActionListener{
+    
 
     JFrame frame = new JFrame();
     JPanel boardPanel = new JPanel();
     EtchedBorder etch = new EtchedBorder();
     JPanel playersContainer = new JPanel();
     
-    JLabel player1Label = null;
-    JLabel player2Label = null;
-    
-    JPanel playerPanel1 = new JPanel();
-    JPanel playerPanel2 = new JPanel();
+    JPanel player1Panel = new JPanel();
+    JPanel player2Panel = new JPanel();
+
+    JLabel player1Label = new JLabel("Player 1");
+    JLabel player2Label = new JLabel("Player 2");
+     
+    JLabel player1Points = new JLabel();
+    JLabel player2Points = new JLabel();
+
+    JLabel player1Name = new JLabel();
+    JLabel player2Name = new JLabel();
     
     JButton iconButton1 = new JButton();
     JButton iconButton2 = new JButton();
@@ -48,8 +54,11 @@ public class Game4x4 extends JFrame implements ActionListener{
     JButton newGame = new JButton("Nytt Spel");
     JButton cancel = new JButton("Avsluta");
 
-    JButton lastButtonPressed = null;
-    String previousCard = null;
+    Player player1;
+    Player player2;
+    ImageIcon[] mixedCardDeck;
+
+    LinkedHashMap<JButton, ImageIcon> buttonHashMap = new LinkedHashMap<JButton, ImageIcon>();
 
     private int cardsVisible = 0;
     int totalPoints = 0;
@@ -58,14 +67,31 @@ public class Game4x4 extends JFrame implements ActionListener{
 
 
 
-    public Game4x4(String player1Name, String player2Name) {
+    public BoardView(Player p1, Player p2, ImageIcon[] cardDeck) {
+        this.player1 = p1;
+        this.player2 = p2;
+        this.mixedCardDeck = cardDeck;
+        
+        
+        buttonHashMap.put(iconButton1, mixedCardDeck[0]);
+		buttonHashMap.put(iconButton2, mixedCardDeck[1]);
+		buttonHashMap.put(iconButton3, mixedCardDeck[2]);
+		buttonHashMap.put(iconButton4, mixedCardDeck[3]);
+		buttonHashMap.put(iconButton5, mixedCardDeck[4]);
+		buttonHashMap.put(iconButton6, mixedCardDeck[5]);
+		buttonHashMap.put(iconButton7, mixedCardDeck[6]);
+		buttonHashMap.put(iconButton8, mixedCardDeck[7]);
+		buttonHashMap.put(iconButton9, mixedCardDeck[8]);
+		buttonHashMap.put(iconButton10, mixedCardDeck[9]);
+		buttonHashMap.put(iconButton11, mixedCardDeck[10]);
+		buttonHashMap.put(iconButton12, mixedCardDeck[11]);
+		buttonHashMap.put(iconButton13, mixedCardDeck[12]);
+		buttonHashMap.put(iconButton14, mixedCardDeck[13]);
+		buttonHashMap.put(iconButton15, mixedCardDeck[14]);
+		buttonHashMap.put(iconButton16, mixedCardDeck[15]);
 
-        player1 = new Player(player1Name);
-        player2 = new Player(player2Name);
 
-        player1Label = new JLabel("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
-        player2Label = new JLabel("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
-        startGame();
+
 
         // Grundramen till spelet.
         frame.setTitle("Detta ska bli ett memoryspel");
@@ -87,23 +113,34 @@ public class Game4x4 extends JFrame implements ActionListener{
 
         // Player 1 och 2 logik
         playersContainer.setLayout(new BoxLayout(playersContainer, BoxLayout.Y_AXIS));
+
+        // Player1 panel settings
+        player1Panel.setBackground(Color.GREEN);
+        player1Panel.setPreferredSize(new Dimension(120,150));
+        player1Panel.setBorder(etch);
         player1Label.setFont(new Font("Verdana", 1,20));
+        player1Name.setText(player1.name);
+        player1Points.setText(player1.getPoints() + " points");
 
+        // Player2 panel settings
+        player2Panel.setBackground(Color.lightGray);
+        player2Panel.setPreferredSize(new Dimension(120,150));
         player2Label.setFont(new Font("Verdana", 1,20));
-        playerPanel1.setBackground(Color.GREEN);
-        playerPanel2.setBackground(Color.lightGray);
+        player2Name.setText(player2.name);
+        player2Points.setText(player2.getPoints() + " points");
 
-        playerPanel1.setPreferredSize(new Dimension(120,150));
-        playerPanel2.setPreferredSize(new Dimension(120,150));
+        // Add Player1/Player2 components
+        playersContainer.add(player1Panel);
+        player1Panel.add(player1Label);
+        player1Panel.add(player1Name);
+        player1Panel.add(player1Points);
 
-        playerPanel1.setBorder(etch);
-        playerPanel2.setBorder(etch);
+        playersContainer.add(player2Panel);
+        player2Panel.add(player2Label);
+        player2Panel.add(player2Name);
+        player2Panel.add(player2Points);
 
-        playerPanel1.add(player1Label);
-        playerPanel2.add(player2Label);
 
-        playersContainer.add(playerPanel1);
-        playersContainer.add(playerPanel2);
 
         // Menyval
         menyPanel.add(newGame);
@@ -169,15 +206,10 @@ public class Game4x4 extends JFrame implements ActionListener{
     }
 
 
-    // Player 1 active
-    public void startGame() {
-        player1.setActive(true);
-    }
-
-    // reset history
+      // reset history
     public void resetCardButton() {
-        lastButtonPressed = null;
-        previousCard = null;
+        Game.lastButtonPressed = null;
+        Game.previousCard = null;
         cardsVisible = 0;
     }
 
@@ -187,7 +219,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         Timer timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             thisButton.setIcon(null);
-            lastButtonPressed.setIcon(null);
+            Game.lastButtonPressed.setIcon(null);
             changePlayer();
             resetCardButton();
             }
@@ -203,9 +235,9 @@ public class Game4x4 extends JFrame implements ActionListener{
         Timer timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                   // flip cards
-                lastButtonPressed.setEnabled(false);
+                Game.lastButtonPressed.setEnabled(false);
                 thisButton.setEnabled(false);
-                addPoint();
+                Game.addPoint(player1, player2);
                 updateScoreboard();
                 resetCardButton();
             }
@@ -221,13 +253,13 @@ public class Game4x4 extends JFrame implements ActionListener{
         if (player1.active){
             player1.setActive(false);
             player2.setActive(true);
-            playerPanel1.setBackground(Color.lightGray);
-            playerPanel2.setBackground(Color.GREEN);
+            player1Panel.setBackground(Color.lightGray);
+            player2Panel.setBackground(Color.GREEN);
         } else {
             player1.setActive(true);
             player2.setActive(false);
-            playerPanel1.setBackground(Color.GREEN);
-            playerPanel2.setBackground(Color.lightGray);
+            player1Panel.setBackground(Color.GREEN);
+            player2Panel.setBackground(Color.lightGray);
         }
     }
     
@@ -238,7 +270,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         } else{
             player2.addPoints();
         }
-        totalPoints = player1.points + player2.points;
+        totalPoints = player1.getPoints() + player2.getPoints();
         if (totalPoints == 8){
             new GameOverClass();
         }
@@ -247,22 +279,35 @@ public class Game4x4 extends JFrame implements ActionListener{
 
     // Update scoreboard with new points
     public void updateScoreboard() {
-        player1Label.setText("<html>Player 1<br>" + player1.name + "<br>Points :" + player1.points + "</html>");
-        player2Label.setText("<html>Player 2<br>" + player2.name + "<br>Points :" + player2.points + "</html>");
+
+        player1Points.setText(player1.getPoints() + " points");
+        player2Points.setText(player2.getPoints() + " points");
     }
+    
+    public LinkedHashMap getGameBoard() {
+        return buttonHashMap;
+            
+    }
+
+        
 
 
     public void actionPerformed(ActionEvent e) {
-        cardsVisible += 1;
         JButton activeButton = (JButton) e.getSource();                // This button is the same as the one being pressed
+        
 
         // If same button is pressed twice, do nothing
-        if(activeButton.equals(lastButtonPressed))
+        if(activeButton.equals(Game.lastButtonPressed))
             return;
 
-        
+        /*
+        cardsVisible += 1;
         if(cardsVisible > 2)
             return;
+        */
+        
+        Game.nextTurn(this.getGameBoard(), activeButton);
+        
 
         //////////////////////////////////////////////////////////////////////
         // iconButton1                                                      //
@@ -272,121 +317,117 @@ public class Game4x4 extends JFrame implements ActionListener{
         // Cards hides if no match                                          // 
         // The selected Button and Card is saved to variables               //
         //////////////////////////////////////////////////////////////////////
+        /*
         if (activeButton.equals(iconButton1)) {
             iconButton1.setIcon(mixedCardDeck[0]);
-            if(mixedCardDeck[0].toString().equals(previousCard)) {
+            if(mixedCardDeck[0].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton1);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[0].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[0].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton1);
 
             }
             else{
-                previousCard = mixedCardDeck[0].toString();
-                lastButtonPressed = activeButton;
+                Game.previousCard = mixedCardDeck[0].toString();
+                Game.lastButtonPressed = activeButton;
             }
 
         }
         // iconButton2
         else if (activeButton.equals(iconButton2)) {
             iconButton2.setIcon(mixedCardDeck[1]);
-            if(mixedCardDeck[1].toString().equals(previousCard)) {
+            if(mixedCardDeck[1].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton2);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[1].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[1].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton2);
             }
             else{
-                previousCard = mixedCardDeck[1].toString();
-                lastButtonPressed = activeButton;
+                Game.previousCard = mixedCardDeck[1].toString();
+                Game.lastButtonPressed = activeButton;
             }
         }
 
         // iconButton3
         else if (activeButton.equals(iconButton3)) {
             iconButton3.setIcon(mixedCardDeck[2]);
-            if(mixedCardDeck[2].toString().equals(previousCard)) {
+            if(mixedCardDeck[2].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton3);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[2].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[2].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton3);
             }
             else{
-                previousCard = mixedCardDeck[2].toString();
-                lastButtonPressed = activeButton;
+                Game.previousCard = mixedCardDeck[2].toString();
+                Game.lastButtonPressed = activeButton;
             }
         }
 
         // iconButton4
         else if (activeButton.equals(iconButton4)) {
             iconButton4.setIcon(mixedCardDeck[3]);
-            if(mixedCardDeck[3].toString().equals(previousCard)) {
+            if(mixedCardDeck[3].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton4);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[3].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[3].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton4);
             }
             else{
-
-                previousCard = mixedCardDeck[3].toString();
-                lastButtonPressed = activeButton;
+                Game.previousCard = mixedCardDeck[3].toString();
+                Game.lastButtonPressed = activeButton;
             }
-
-
-            previousCard = mixedCardDeck[3].toString();
-            lastButtonPressed = activeButton;
-            } 
+        }
 
 
         // iconButton5 
         else if (activeButton.equals(iconButton5)) {
             iconButton5.setIcon(mixedCardDeck[4]);
-            if(mixedCardDeck[4].toString().equals(previousCard)) {
+            if(mixedCardDeck[4].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton5);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[4].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[4].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton5);
             }
             else{
-            previousCard = mixedCardDeck[4].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[4].toString();
+            Game.lastButtonPressed = activeButton;
             }
         }
 
         // iconButton6 
         else if (activeButton.equals(iconButton6)) {
             iconButton6.setIcon(mixedCardDeck[5]);
-            if(mixedCardDeck[5].toString().equals(previousCard)) {
+            if(mixedCardDeck[5].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton6);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[5].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[5].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton6);
             }
             else{
-            previousCard = mixedCardDeck[5].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[5].toString();
+            Game.lastButtonPressed = activeButton;
             }
         } 
 
         // iconButton7
         else if (activeButton.equals(iconButton7)) {
             iconButton7.setIcon(mixedCardDeck[6]);
-            if(mixedCardDeck[6].toString().equals(previousCard)) {
+            if(mixedCardDeck[6].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton7);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[6].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[6].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton7);
             }
             else{
-            previousCard = mixedCardDeck[6].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[6].toString();
+            Game.lastButtonPressed = activeButton;
             }
         } 
 
@@ -394,144 +435,144 @@ public class Game4x4 extends JFrame implements ActionListener{
         // iconButton8
         else if (activeButton.equals(iconButton8)) {
             iconButton8.setIcon(mixedCardDeck[7]);
-            if(mixedCardDeck[7].toString().equals(previousCard)) {
+            if(mixedCardDeck[7].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton8);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[7].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[7].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton8);
             }
             else{
-            previousCard = mixedCardDeck[7].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[7].toString();
+            Game.lastButtonPressed = activeButton;
             }
         }
 
         // iconButton9
         else if (activeButton.equals(iconButton9)) {
             iconButton9.setIcon(mixedCardDeck[8]);
-            if(mixedCardDeck[8].toString().equals(previousCard)) {
+            if(mixedCardDeck[8].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton9);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[8].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[8].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton9);
             }
             else{
-            previousCard = mixedCardDeck[8].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[8].toString();
+            Game.lastButtonPressed = activeButton;
             }
         } 
 
         // iconButton10
         else if (activeButton.equals(iconButton10)) {
             iconButton10.setIcon(mixedCardDeck[9]);
-            if(mixedCardDeck[9].toString().equals(previousCard)) {
+            if(mixedCardDeck[9].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton10);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[9].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[9].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton10);
             }
             else{
-            previousCard = mixedCardDeck[9].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[9].toString();
+            Game.lastButtonPressed = activeButton;
             }
         } 
 
         // iconButton11
         else if (activeButton.equals(iconButton11)) {
             iconButton11.setIcon(mixedCardDeck[10]);
-            if(mixedCardDeck[10].toString().equals(previousCard)) {
+            if(mixedCardDeck[10].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton11);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[10].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[10].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton11);
             }
             else{
-            previousCard = mixedCardDeck[10].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[10].toString();
+            Game.lastButtonPressed = activeButton;
             }
         }
         
         // iconButton12
         else if (activeButton.equals(iconButton12)) {
             iconButton12.setIcon(mixedCardDeck[11]);
-            if(mixedCardDeck[11].toString().equals(previousCard)) {
+            if(mixedCardDeck[11].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton12);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[11].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[11].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton12);
             }
             else{
-            previousCard = mixedCardDeck[11].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[11].toString();
+            Game.lastButtonPressed = activeButton;
             }
         } 
         
         // iconButton13
         else if (activeButton.equals(iconButton13)) {
             iconButton13.setIcon(mixedCardDeck[12]);
-            if(mixedCardDeck[12].toString().equals(previousCard)) {
+            if(mixedCardDeck[12].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton13);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[12].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[12].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton13);
             }
             else{
-            previousCard = mixedCardDeck[12].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[12].toString();
+            Game.lastButtonPressed = activeButton;
             }
         } 
         
         // iconButton14
         else if (activeButton.equals(iconButton14)) {
             iconButton14.setIcon(mixedCardDeck[13]);
-            if(mixedCardDeck[13].toString().equals(previousCard)) {
+            if(mixedCardDeck[13].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton14);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[13].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[13].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton14);
             }
             else{
-            previousCard = mixedCardDeck[13].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[13].toString();
+            Game.lastButtonPressed = activeButton;
             }
         } 
         
         // iconButton15
         else if (activeButton.equals(iconButton15)) {
             iconButton15.setIcon(mixedCardDeck[14]);
-            if(mixedCardDeck[14].toString().equals(previousCard)) {
+            if(mixedCardDeck[14].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton15);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[14].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[14].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton15);
             }
             else{
-            previousCard = mixedCardDeck[14].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[14].toString();
+            Game.lastButtonPressed = activeButton;
             }
         } 
         
         // iconButton16
         else if (activeButton.equals(iconButton16)) {
             iconButton16.setIcon(mixedCardDeck[15]);
-            if(mixedCardDeck[15].toString().equals(previousCard)) {
+            if(mixedCardDeck[15].toString().equals(Game.previousCard)) {
                 this.disableCards(iconButton16);
                 return;
             }
-            if (previousCard != null && !mixedCardDeck[15].toString().equals(previousCard)){
+            if (Game.previousCard != null && !mixedCardDeck[15].toString().equals(Game.previousCard)){
                 this.hideCards(iconButton16);
             }
             else{
-            previousCard = mixedCardDeck[15].toString();
-            lastButtonPressed = activeButton;
+            Game.previousCard = mixedCardDeck[15].toString();
+            Game.lastButtonPressed = activeButton;
             }
         }
 
@@ -544,5 +585,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         if (activeButton.equals(cancel)){
             frame.dispose();
         }
+        */
     }
+    
 }
