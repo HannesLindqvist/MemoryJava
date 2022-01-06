@@ -241,7 +241,7 @@ public class Game4x4 extends JFrame implements ActionListener{
         totalPoints = player1.points + player2.points;
         if (totalPoints == 8){
             frame.dispose();
-            new GameOverClass();
+            new GameOverClass(player1,player2);
         }
     }
 
