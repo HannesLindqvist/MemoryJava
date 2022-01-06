@@ -254,7 +254,6 @@ public class Game4x4 extends JFrame implements ActionListener{
 
 
     public void actionPerformed(ActionEvent e) {
-        cardsVisible += 1;
         JButton activeButton = (JButton) e.getSource();                // This button is the same as the one being pressed
 
         // If same button is pressed twice, do nothing
@@ -262,6 +261,7 @@ public class Game4x4 extends JFrame implements ActionListener{
             return;
 
         
+        cardsVisible += 1;
         if(cardsVisible > 2)
             return;
 
