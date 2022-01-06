@@ -6,20 +6,20 @@ import javax.swing.ImageIcon;
 
 public class Cards {
 
-    static ImageIcon cherry = new ImageIcon("cherry.jpg"); 
-    static ImageIcon donuts = new ImageIcon("donuts.png"); 
-    static ImageIcon heart = new ImageIcon("heart.png"); 
-    static ImageIcon knight = new ImageIcon("knight.png"); 
-    static ImageIcon pikachu = new ImageIcon("pikachu.png"); 
-    static ImageIcon pizza = new ImageIcon("pizza.png"); 
-    static ImageIcon skull = new ImageIcon("skull.jpg"); 
-    static ImageIcon yinyang = new ImageIcon("yinyang.png"); 
-    static ImageIcon yoshi = new ImageIcon("yoshi.png"); 
-    static ImageIcon svamp = new ImageIcon("Svamp.jpg");
+    private ImageIcon cherry = new ImageIcon("cherry.jpg"); 
+    private ImageIcon donuts = new ImageIcon("donuts.png"); 
+    private ImageIcon heart = new ImageIcon("heart.png"); 
+    private ImageIcon knight = new ImageIcon("knight.png"); 
+    private ImageIcon pikachu = new ImageIcon("pikachu.png"); 
+    private ImageIcon pizza = new ImageIcon("pizza.png"); 
+    private ImageIcon skull = new ImageIcon("skull.jpg"); 
+    private ImageIcon yinyang = new ImageIcon("yinyang.png"); 
+    private ImageIcon yoshi = new ImageIcon("yoshi.png"); 
+    private ImageIcon svamp = new ImageIcon("Svamp.jpg");
     
-    static ImageIcon[] deck = {cherry, cherry, donuts, donuts, knight, knight, pikachu, pikachu, pizza, pizza, skull, skull, yoshi, yoshi, svamp, svamp};
+    private ImageIcon[] deck = {cherry, cherry, donuts, donuts, knight, knight, pikachu, pikachu, pizza, pizza, skull, skull, yoshi, yoshi, svamp, svamp};
     
-    public static ImageIcon[] mixDeck() {
+    public ImageIcon[] mixDeck() {
         Random rand = new Random();
 
         for (int i = 0; i < deck.length; i++) {

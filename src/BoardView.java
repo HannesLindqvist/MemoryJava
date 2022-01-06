@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 
-public class BoardView extends JFrame implements ActionListener{
+public class BoardView extends JFrame {
     
 
     JFrame frame = new JFrame();
@@ -21,14 +21,14 @@ public class BoardView extends JFrame implements ActionListener{
     EtchedBorder etch = new EtchedBorder();
     JPanel playersContainer = new JPanel();
     
-    JPanel player1Panel = new JPanel();
-    JPanel player2Panel = new JPanel();
+    static JPanel player1Panel = new JPanel();
+    static JPanel player2Panel = new JPanel();
 
     JLabel player1Label = new JLabel("Player 1");
     JLabel player2Label = new JLabel("Player 2");
      
-    JLabel player1Points = new JLabel();
-    JLabel player2Points = new JLabel();
+    static JLabel player1Points = new JLabel();
+    static JLabel player2Points = new JLabel();
 
     JLabel player1Name = new JLabel();
     JLabel player2Name = new JLabel();
@@ -54,17 +54,14 @@ public class BoardView extends JFrame implements ActionListener{
     JButton newGame = new JButton("Nytt Spel");
     JButton cancel = new JButton("Avsluta");
 
-    Player player1;
-    Player player2;
+    static Player player1;
+    static Player player2;
     ImageIcon[] mixedCardDeck;
 
-    LinkedHashMap<JButton, ImageIcon> buttonHashMap = new LinkedHashMap<JButton, ImageIcon>();
+    LinkedHashMap<JButton, ImageIcon> buttonHashMap 
+            = new LinkedHashMap<JButton, ImageIcon>();
 
     private int cardsVisible = 0;
-    int totalPoints = 0;
-
-
-
 
 
     public BoardView(Player p1, Player p2, ImageIcon[] cardDeck) {
@@ -184,99 +181,38 @@ public class BoardView extends JFrame implements ActionListener{
 
 
         // Logik till knapparna
-        iconButton1.addActionListener(this);
-        iconButton2.addActionListener(this);
-        iconButton3.addActionListener(this);
-        iconButton4.addActionListener(this);
-        iconButton5.addActionListener(this);
-        iconButton6.addActionListener(this);
-        iconButton7.addActionListener(this);
-        iconButton8.addActionListener(this);
-        iconButton9.addActionListener(this);
-        iconButton10.addActionListener(this);
-        iconButton11.addActionListener(this);
-        iconButton12.addActionListener(this);
-        iconButton13.addActionListener(this);
-        iconButton14.addActionListener(this);
-        iconButton15.addActionListener(this);
-        iconButton16.addActionListener(this);
-        cancel.addActionListener(this);
-        newGame.addActionListener(this);
+        ActionListener listener = new Game();
+        iconButton1.addActionListener(listener);
+        iconButton2.addActionListener(listener);
+        iconButton3.addActionListener(listener);
+        iconButton4.addActionListener(listener);
+        iconButton5.addActionListener(listener);
+        iconButton6.addActionListener(listener);
+        iconButton7.addActionListener(listener);
+        iconButton8.addActionListener(listener);
+        iconButton9.addActionListener(listener);
+        iconButton10.addActionListener(listener);
+        iconButton11.addActionListener(listener);
+        iconButton12.addActionListener(listener);
+        iconButton13.addActionListener(listener);
+        iconButton14.addActionListener(listener);
+        iconButton15.addActionListener(listener);
+        iconButton16.addActionListener(listener);
+        cancel.addActionListener(listener);
+        newGame.addActionListener(listener);
 
     }
 
-
-      // reset history
-    public void resetCardButton() {
-        Game.lastButtonPressed = null;
-        Game.previousCard = null;
-        cardsVisible = 0;
-    }
-
-    // hide cards
-    public void hideCards(JButton thisButton) {
-
-        Timer timer = new Timer(1000, new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-            thisButton.setIcon(null);
-            Game.lastButtonPressed.setIcon(null);
-            changePlayer();
-            resetCardButton();
-            }
-        });
-
-        timer.setRepeats(false);
-        timer.restart();
-        
-    }
-
-    // disable buttons/cards
-    public void disableCards(JButton thisButton){
-        Timer timer = new Timer(1000, new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                  // flip cards
-                Game.lastButtonPressed.setEnabled(false);
-                thisButton.setEnabled(false);
-                Game.addPoint(player1, player2);
-                updateScoreboard();
-                resetCardButton();
-            }
-        });
-
-        timer.setRepeats(false);
-        timer.restart();
-        
+    // Reset visible card counter
+    public void setCardsVisible(int count) {
+        cardsVisible = count;
     }
     
-    // change active player
-    public void changePlayer() {
-        if (player1.active){
-            player1.setActive(false);
-            player2.setActive(true);
-            player1Panel.setBackground(Color.lightGray);
-            player2Panel.setBackground(Color.GREEN);
-        } else {
-            player1.setActive(true);
-            player2.setActive(false);
-            player1Panel.setBackground(Color.GREEN);
-            player2Panel.setBackground(Color.lightGray);
-        }
+    public int getCardsVisible() {
+        return cardsVisible; 
     }
     
-    // add point to active player
-    public void addPoint() {
-        if (player1.active){
-            player1.addPoints();
-        } else{
-            player2.addPoints();
-        }
-        totalPoints = player1.getPoints() + player2.getPoints();
-        if (totalPoints == 8){
-            new GameOverClass();
-        }
-    }
-
-
+ 
     // Update scoreboard with new points
     public void updateScoreboard() {
 
@@ -289,303 +225,25 @@ public class BoardView extends JFrame implements ActionListener{
             
     }
 
-        
-
-
+    /*
+    // Each turn is started when a valid board button is pressed
     public void actionPerformed(ActionEvent e) {
         JButton activeButton = (JButton) e.getSource();                // This button is the same as the one being pressed
-        
 
         // If same button is pressed twice, do nothing
         if(activeButton.equals(Game.lastButtonPressed))
             return;
 
-        /*
+        // If two cards are visible, do not show additonal cards
+        // The hideCard method resets the counter
         cardsVisible += 1;
         if(cardsVisible > 2)
             return;
-        */
         
-        Game.nextTurn(this.getGameBoard(), activeButton);
+        // 
+        Game.thisTurn(getGameBoard(), activeButton);
         
 
-        //////////////////////////////////////////////////////////////////////
-        // iconButton1                                                      //
-        // Each button has its own if-statements but the logic is the same  // 
-        // Card shown on button when button is pressed                      //
-        // Cards disabled if matched                                        // 
-        // Cards hides if no match                                          // 
-        // The selected Button and Card is saved to variables               //
-        //////////////////////////////////////////////////////////////////////
-        /*
-        if (activeButton.equals(iconButton1)) {
-            iconButton1.setIcon(mixedCardDeck[0]);
-            if(mixedCardDeck[0].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton1);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[0].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton1);
-
-            }
-            else{
-                Game.previousCard = mixedCardDeck[0].toString();
-                Game.lastButtonPressed = activeButton;
-            }
-
-        }
-        // iconButton2
-        else if (activeButton.equals(iconButton2)) {
-            iconButton2.setIcon(mixedCardDeck[1]);
-            if(mixedCardDeck[1].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton2);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[1].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton2);
-            }
-            else{
-                Game.previousCard = mixedCardDeck[1].toString();
-                Game.lastButtonPressed = activeButton;
-            }
-        }
-
-        // iconButton3
-        else if (activeButton.equals(iconButton3)) {
-            iconButton3.setIcon(mixedCardDeck[2]);
-            if(mixedCardDeck[2].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton3);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[2].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton3);
-            }
-            else{
-                Game.previousCard = mixedCardDeck[2].toString();
-                Game.lastButtonPressed = activeButton;
-            }
-        }
-
-        // iconButton4
-        else if (activeButton.equals(iconButton4)) {
-            iconButton4.setIcon(mixedCardDeck[3]);
-            if(mixedCardDeck[3].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton4);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[3].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton4);
-            }
-            else{
-                Game.previousCard = mixedCardDeck[3].toString();
-                Game.lastButtonPressed = activeButton;
-            }
-        }
-
-
-        // iconButton5 
-        else if (activeButton.equals(iconButton5)) {
-            iconButton5.setIcon(mixedCardDeck[4]);
-            if(mixedCardDeck[4].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton5);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[4].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton5);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[4].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        }
-
-        // iconButton6 
-        else if (activeButton.equals(iconButton6)) {
-            iconButton6.setIcon(mixedCardDeck[5]);
-            if(mixedCardDeck[5].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton6);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[5].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton6);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[5].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        } 
-
-        // iconButton7
-        else if (activeButton.equals(iconButton7)) {
-            iconButton7.setIcon(mixedCardDeck[6]);
-            if(mixedCardDeck[6].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton7);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[6].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton7);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[6].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        } 
-
-
-        // iconButton8
-        else if (activeButton.equals(iconButton8)) {
-            iconButton8.setIcon(mixedCardDeck[7]);
-            if(mixedCardDeck[7].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton8);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[7].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton8);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[7].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        }
-
-        // iconButton9
-        else if (activeButton.equals(iconButton9)) {
-            iconButton9.setIcon(mixedCardDeck[8]);
-            if(mixedCardDeck[8].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton9);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[8].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton9);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[8].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        } 
-
-        // iconButton10
-        else if (activeButton.equals(iconButton10)) {
-            iconButton10.setIcon(mixedCardDeck[9]);
-            if(mixedCardDeck[9].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton10);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[9].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton10);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[9].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        } 
-
-        // iconButton11
-        else if (activeButton.equals(iconButton11)) {
-            iconButton11.setIcon(mixedCardDeck[10]);
-            if(mixedCardDeck[10].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton11);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[10].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton11);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[10].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        }
-        
-        // iconButton12
-        else if (activeButton.equals(iconButton12)) {
-            iconButton12.setIcon(mixedCardDeck[11]);
-            if(mixedCardDeck[11].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton12);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[11].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton12);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[11].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        } 
-        
-        // iconButton13
-        else if (activeButton.equals(iconButton13)) {
-            iconButton13.setIcon(mixedCardDeck[12]);
-            if(mixedCardDeck[12].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton13);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[12].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton13);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[12].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        } 
-        
-        // iconButton14
-        else if (activeButton.equals(iconButton14)) {
-            iconButton14.setIcon(mixedCardDeck[13]);
-            if(mixedCardDeck[13].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton14);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[13].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton14);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[13].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        } 
-        
-        // iconButton15
-        else if (activeButton.equals(iconButton15)) {
-            iconButton15.setIcon(mixedCardDeck[14]);
-            if(mixedCardDeck[14].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton15);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[14].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton15);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[14].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        } 
-        
-        // iconButton16
-        else if (activeButton.equals(iconButton16)) {
-            iconButton16.setIcon(mixedCardDeck[15]);
-            if(mixedCardDeck[15].toString().equals(Game.previousCard)) {
-                this.disableCards(iconButton16);
-                return;
-            }
-            if (Game.previousCard != null && !mixedCardDeck[15].toString().equals(Game.previousCard)){
-                this.hideCards(iconButton16);
-            }
-            else{
-            Game.previousCard = mixedCardDeck[15].toString();
-            Game.lastButtonPressed = activeButton;
-            }
-        }
-
-            // Logic for newgame button and Exit
-        if (activeButton.equals(newGame)){
-            frame.dispose();
-            SwingUtilities.invokeLater(new LaunchMenu());
-        }
-
-        if (activeButton.equals(cancel)){
-            frame.dispose();
-        }
-        */
     }
-    
+   */ 
 }
