@@ -13,8 +13,8 @@ import java.util.Set;
 
 public class Game implements ActionListener {
     static Cards cardDeck = new Cards(); 
-    static Player player1 = new Player(true, "Kalle");
-    static Player player2 = new Player(false, "Lisa");
+    static Player player1 = new Player(true);
+    static Player player2 = new Player(false);
     static BoardView boardView = new BoardView(player1, player2, cardDeck.mixDeck());
     
     static JButton lastButtonPressed = null;
@@ -125,15 +125,6 @@ public class Game implements ActionListener {
 
     }
     
-
-    public static void main(String[] args){ 
-
-        
-        //SwingUtilities.invokeLater(new LaunchMenu());
-        //new GameOverClass();
-
-    }
-    
     // Each turn is started when a valid board button is pressed
     public void actionPerformed(ActionEvent e) {
         JButton activeButton = (JButton) e.getSource();             // This button is the same as the one being pressed
@@ -153,6 +144,5 @@ public class Game implements ActionListener {
 
     }
    
-    
     
 }

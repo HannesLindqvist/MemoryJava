@@ -14,6 +14,13 @@ public class LaunchMenu extends JFrame implements Runnable, ActionListener {
     JButton playButton,exitButton;
     JTextField player1Text,player2Text;
 
+    static String p1Name;
+    static String p2Name;
+
+    public JTextField getPayer1Name() {
+        return player1Text;
+    }
+
     @Override
     public void run() {
 
@@ -102,18 +109,32 @@ public class LaunchMenu extends JFrame implements Runnable, ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public  void actionPerformed(ActionEvent e) {
 
         if (e.getSource()==playButton){
-            //new BoardView();
-
+            p1Name = player1Text.getText();
+            p2Name = player2Text.getText();
+            
+            //player2.setName(player2Text.getText());
+            
             frame.dispose();
+
+            new Game();
+
         }
         if (e.getSource()==exitButton){
             frame.dispose();
         }
 
-    }
+    } 
+
+    public static void main(String[] args){ 
+
+        
+        SwingUtilities.invokeLater(new LaunchMenu());
+
+    }  
+ 
 }
 
 

@@ -116,14 +116,14 @@ public class BoardView extends JFrame {
         player1Panel.setPreferredSize(new Dimension(120,150));
         player1Panel.setBorder(etch);
         player1Label.setFont(new Font("Verdana", 1,20));
-        player1Name.setText(player1.name);
+        player1Name.setText(LaunchMenu.p1Name);
         player1Points.setText(player1.getPoints() + " points");
 
         // Player2 panel settings
         player2Panel.setBackground(Color.lightGray);
         player2Panel.setPreferredSize(new Dimension(120,150));
         player2Label.setFont(new Font("Verdana", 1,20));
-        player2Name.setText(player2.name);
+        player2Name.setText(LaunchMenu.p2Name);
         player2Points.setText(player2.getPoints() + " points");
 
         // Add Player1/Player2 components
@@ -204,11 +204,12 @@ public class BoardView extends JFrame {
     }
 
     // Reset visible card counter
-    public void setCardsVisible(int count) {
+    public void setVisibleCardCount(int count) {
         cardsVisible = count;
     }
     
-    public int getCardsVisible() {
+    
+    public int getVisibleCardCount() {
         return cardsVisible; 
     }
     

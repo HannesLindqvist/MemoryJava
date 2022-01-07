@@ -5,11 +5,18 @@ public class Player {
     int points;
     boolean active;
 
-    public Player (Boolean firstRound, String name) {
-        // check if icons match
-         this.name = name;
-         this.points = 0;
-         active = firstRound;
+    public Player (Boolean startAsActive) {
+        this.name = name; 
+        this.points = 0;
+        active = startAsActive;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getName(){
+        return name;
     }
 
     public int getPoints(){
