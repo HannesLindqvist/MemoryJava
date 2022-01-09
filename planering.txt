@@ -1,0 +1,27 @@
+MemoryJava
+
+1. Memory GUI - startmeny
+	1. Rita ut startmeny med val av storlek på spelbräde samt start knapp för att starta spelet
+	2. Koppla startknapp till lyssnare som returnerar valda värde och startar spelet.
+
+2. Memory GUI - spelbräde
+	1. Rita ut spelbräde tillsammans med spelarnas poäng och indikation på aktiv spelare samt menyval för Avsluta/Nytt spel
+	2. Markera den spelare var tur det är
+	3. Korten är gömda som default
+	4. VIsa korten genom att klicka på knapparna
+
+3. Val av kort
+	1. Spelaren väljer två knappar. Visa knapparnas repektive kort
+
+4. Ingen matchning
+	1. Återställ korten i gömt läge om de inte matchar
+	2. Turen går över till andra spelaren
+
+3. Matchning
+	1. De matchande korten går in låst läge
+	2. Tilldela 1 poäng till aktiva spelaren
+	3. Låt aktiva spelaren fortsätta välja kort.
+	
+4. Slut på gömda kort
+	1. Tilldela vinst till spelaren med flest poäng
+	
