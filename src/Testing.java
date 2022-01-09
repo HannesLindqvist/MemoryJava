@@ -85,8 +85,6 @@ public class Testing {
         //game.lastButtonPressed.setIcon(mixedCardDeck[0]);
         //game.iconButton2.setIcon(mixedCardDeck[1]);                 // represents latest clicked button
 
-        Assertions.assertNotNull(game.lastButtonPressed.getIcon()); // check if icon exist
-        Assertions.assertNotNull(game.lastButtonPressed.getIcon()); // check if icon exist
         
         game.hideCards(game.iconButton2);
 
