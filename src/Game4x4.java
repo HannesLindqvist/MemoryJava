@@ -51,7 +51,7 @@ public class Game4x4 extends JFrame implements ActionListener{
     JButton lastButtonPressed = null;
     String previousCard = null;
 
-    private int cardsVisible = 0;
+    int cardsVisible = 0;
     int totalPoints = 0;
 
 
