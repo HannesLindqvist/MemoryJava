@@ -1,6 +1,8 @@
 import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.ImageIcon;
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,11 +14,7 @@ public class Testing {
     ImageIcon[] mixedCardDeck = Cards.mixDeck();
     Cards cardDeck = new Cards();
 
-    @Test
-    public void testCards() {
-        
-    }
-        
+           
     @Test
     public void changeActivePlayer() {
         // game stats with player1 active and player2 inactive
@@ -42,8 +40,7 @@ public class Testing {
         Assertions.assertEquals(0, game.player1.getPoints());
         game.addPoint();
         Assertions.assertEquals(1, game.player1.getPoints());
-
-    }
+}
 
     @Test
     public void disableCards() {
@@ -69,6 +66,12 @@ public class Testing {
         timer.restart();
         
     }
+
+    @Test
+    public void testCards() {
+        Assertions.assertEquals(16, mixedCardDeck.length); // Verify 16 card is returned
+    }
+
 
     @Test
     public void hideCards() {
